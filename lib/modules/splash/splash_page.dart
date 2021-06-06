@@ -11,12 +11,16 @@ class _SplashPageState extends State<SplashPage> {
   void initializeFirebase() async {
     try {
       await Firebase.initializeApp();
-    } catch (e) {}
+      await Future.delayed(Duration(seconds: 2));
+      Navigator.pushNamed(context, "/login");
+    } catch (e) {
+      Navigator.pushNamed(context, "/error");
+    }
   }
 
   @override
   void initState() {
-    initState();
+    initializeFirebase();
     super.initState();
   }
 

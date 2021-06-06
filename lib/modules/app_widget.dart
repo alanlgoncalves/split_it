@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
       routes: {
         "/splash": (context) => SplashPage(),
         "/login": (context) => LoginPage(),
-        "/erro": (context) => ErrorPage(),
+        "/error": (context) => ErrorPage(),
       },
     );
   }
