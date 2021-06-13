@@ -14,6 +14,7 @@ class _SplashPageState extends State<SplashPage> {
       await Future.delayed(Duration(seconds: 2));
       Navigator.pushNamed(context, "/login");
     } catch (e) {
+      print(e);
       Navigator.pushNamed(context, "/error");
     }
   }

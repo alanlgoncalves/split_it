@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:split_it/modules/login/login_controller.dart';
 import 'package:split_it/modules/login/widgets/social_button.dart';
 import 'package:split_it/theme/app_theme.dart';
 
@@ -12,6 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final loginController = LoginController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,20 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                   imagePath: "assets/images/google_icon.png",
                   label: "Entrar com Google",
                   onTap: () async {
-                    GoogleSignIn _googleSignIn = GoogleSignIn(
-                      scopes: [
-                        'email',
-                        'https://www.googleapis.com/auth/contacts.readonly',
-                      ],
-                    );
-
-                    try {
-                      final credential = await _googleSignIn.signIn();
-
-                      print(credential);
-                    } catch (error) {
-                      print(error);
-                    }
+                    loginController.googleSignIn();
                   },
                 ),
               ),
