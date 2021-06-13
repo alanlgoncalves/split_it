@@ -4,6 +4,8 @@ import 'package:split_it/modules/login/login_controller.dart';
 import 'package:split_it/modules/login/widgets/social_button.dart';
 import 'package:split_it/theme/app_theme.dart';
 
+import 'login_state.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -12,7 +14,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final loginController = LoginController();
+  late LoginController loginController;
+
+  @override
+  void initState() {
+    loginController = LoginController(onUpdate: () {
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +62,21 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(height: 32),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: SocialButtonWidget(
-                  imagePath: "assets/images/google_icon.png",
-                  label: "Entrar com Google",
-                  onTap: () async {
-                    loginController.googleSignIn();
-                  },
+              if (loginController.state is LoginStateLoading) ...[
+                CircularProgressIndicator(),
+              ] else if (loginController.state is LoginStateFailure) ...[
+                Text((loginController.state as LoginStateFailure).message)
+              ] else
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: SocialButtonWidget(
+                    imagePath: "assets/images/google_icon.png",
+                    label: "Entrar com Google",
+                    onTap: () async {
+                      loginController.googleSignIn();
+                    },
+                  ),
                 ),
-              ),
               SizedBox(height: 12),
               // TODO: Need to configure on Apple
               Padding(
