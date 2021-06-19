@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:split_it/modules/home/widgets/app_bar_widget.dart';
-import 'package:split_it/modules/home/widgets/info_card_widget.dart';
+import 'package:split_it/modules/home/widgets/event_tile_widget.dar.dart';
 import 'package:split_it/modules/login/models/user_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,8 +21,11 @@ class _HomePageState extends State<HomePage> {
         user: user,
         onTapAddButton: () {},
       ),
-      body: InfoCardWidget(
-        value: 100,
+      body: EventTileWidget(
+        title: "Churrasco",
+        subtitle: "05 de Maio",
+        value: -32.50,
+        friends: 2,
       ),
     );
   }

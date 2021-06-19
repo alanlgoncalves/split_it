@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:split_it/modules/home/widgets/icon_dolar_widget.dar.dart';
+import 'package:split_it/modules/home/widgets/icon_dolar_widget.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class InfoCardWidget extends StatelessWidget {
@@ -43,7 +43,7 @@ class InfoCardWidget extends StatelessWidget {
                 height: 4,
               ),
               Text(
-                "R\$ 145,00",
+                "R\$ ${value.toStringAsFixed(2)}",
                 style: textStyle,
               ),
             ],
