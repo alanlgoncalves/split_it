@@ -6,5 +6,3 @@ abstract class HomeRepository {
   Future<List<EventModel>> getEvents();
   Future<DashboardModel> getDashboard();
 }
-
-class HomeRepositoryMock {}
