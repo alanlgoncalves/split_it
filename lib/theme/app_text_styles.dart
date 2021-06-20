@@ -10,6 +10,10 @@ abstract class AppTextStyles {
   TextStyle get infoCardTitle;
   TextStyle get infoCardSubtitle1;
   TextStyle get infoCardSubtitle2;
+  TextStyle get eventTileTitle;
+  TextStyle get eventTileSubtitle;
+  TextStyle get eventTileMoney;
+  TextStyle get eventTileFriends;
 }
 
 class AppTextStylesDefault implements AppTextStyles {
@@ -53,5 +57,33 @@ class AppTextStylesDefault implements AppTextStyles {
         fontSize: 20,
         fontWeight: FontWeight.w600,
         color: AppTheme.colors.infoCardSubtitle2,
+      );
+
+  @override
+  TextStyle get eventTileFriends => GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: AppTheme.colors.eventTileFriends,
+      );
+
+  @override
+  TextStyle get eventTileMoney => GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: AppTheme.colors.eventTileMoney,
+      );
+
+  @override
+  TextStyle get eventTileSubtitle => GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: AppTheme.colors.eventTileSubtitle,
+      );
+
+  @override
+  TextStyle get eventTileTitle => GoogleFonts.inter(
+        fontSize: 15,
+        fontWeight: FontWeight.w600,
+        color: AppTheme.colors.eventTileTitle,
       );
 }
