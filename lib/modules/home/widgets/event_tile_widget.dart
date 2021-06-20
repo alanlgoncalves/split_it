@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:split_it/modules/home/widgets/icon_dolar_widget.dart';
+import 'package:split_it/shared/models/event_model.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class EventTileWidget extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final double value;
-  final int friends;
+  final EventModel event;
 
-  const EventTileWidget(
-      {Key? key,
-      required this.title,
-      required this.subtitle,
-      required this.value,
-      required this.friends})
-      : super(key: key);
+  const EventTileWidget({Key? key, required this.event}) : super(key: key);
 
   IconDollarType get type =>
-      value >= 0 ? IconDollarType.RECEIVE : IconDollarType.SEND;
+      event.value >= 0 ? IconDollarType.RECEIVE : IconDollarType.SEND;
 
   @override
   Widget build(BuildContext context) {
@@ -35,25 +27,25 @@ class EventTileWidget extends StatelessWidget {
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   title: Text(
-                    title,
+                    event.title,
                     style: AppTheme.textStyles.eventTileSubtitle,
                   ),
                   subtitle: Text(
-                    subtitle,
+                    event.createdAt.toIso8601String(),
                     style: AppTheme.textStyles.eventTileSubtitle,
                   ),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "R\$ ${value.toStringAsFixed(2)}",
+                        "R\$ ${event.value.toStringAsFixed(2)}",
                         style: AppTheme.textStyles.eventTileMoney,
                       ),
                       SizedBox(
                         height: 5,
                       ),
                       Text(
-                        "$friends ${friends > 1 ? "amigos(as)" : "amigo(a)"}",
+                        "${event.friends} ${event.friends > 1 ? "amigos(as)" : "amigo(a)"}",
                         style: AppTheme.textStyles.eventTileFriends,
                       ),
                     ],
