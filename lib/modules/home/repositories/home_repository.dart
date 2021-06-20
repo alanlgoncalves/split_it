@@ -1,0 +1,10 @@
+import 'package:split_it/shared/models/event_model.dart';
+
+import '../models/dashboard_model.dart';
+
+abstract class HomeRepository {
+  Future<List<EventModel>> getEvents();
+  Future<DashboardModel> getDashboard();
+}
+
+class HomeRepositoryMock {}
