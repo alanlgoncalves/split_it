@@ -21,11 +21,14 @@ class _HomePageState extends State<HomePage> {
         user: user,
         onTapAddButton: () {},
       ),
-      body: EventTileWidget(
-        title: "Churrasco",
-        subtitle: "05 de Maio",
-        value: -32.50,
-        friends: 2,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: EventTileWidget(
+          title: "Churrasco",
+          subtitle: "05 de Maio",
+          value: 32.50,
+          friends: 1,
+        ),
       ),
     );
   }
