@@ -25,7 +25,7 @@ void main() {
     when(repository.getDashboard)
         .thenAnswer((_) async => DashboardModel(receive: 100, send: 101));
 
-    await controller.getDashboard(() {});
+    await controller.getDashboard();
 
     expect(states[0], isInstanceOf<AppBarStateLoading>());
     expect(states[1], isInstanceOf<AppBarStateSuccess>());
@@ -40,7 +40,7 @@ void main() {
 
     when(repository.getDashboard).thenThrow("Error");
 
-    await controller.getDashboard(() {});
+    await controller.getDashboard();
 
     expect(states[0], isInstanceOf<AppBarStateLoading>());
     expect(states[1], isInstanceOf<AppBarStateFailure>());

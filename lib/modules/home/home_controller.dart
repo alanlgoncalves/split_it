@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:split_it/modules/home/home_state.dart';
 import 'package:split_it/modules/home/repositories/home_repository.dart';
 import 'package:split_it/modules/home/repositories/home_repository_mock.dart';
@@ -13,21 +12,19 @@ class HomeController {
     this.repository = repository ?? HomeRepositoryMock();
   }
 
-  getEvents(VoidCallback onUpdate) async {
-    state = HomeStateLoading();
-    update();
+  getEvents() async {
+    update(HomeStateLoading());
     try {
       final response = await repository.getEvents();
-      state = HomeStateSuccess(events: response);
+      update(HomeStateSuccess(events: response));
     } catch (e) {
-      state = HomeStateFailure(message: e.toString());
-    } finally {
-      update();
+      update(HomeStateFailure(message: e.toString()));
     }
-    onUpdate();
   }
 
-  void update() {
+  void update(HomeState state) {
+    this.state = state;
+
     if (onListen != null) {
       onListen!(state);
     }
