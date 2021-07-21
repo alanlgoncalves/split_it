@@ -14,6 +14,8 @@ abstract class AppTextStyles {
   TextStyle get eventTileSubtitle;
   TextStyle get eventTileMoney;
   TextStyle get eventTileFriends;
+  TextStyle get stepperIndicatorPrimary;
+  TextStyle get stepperIndicatorSecondary;
 }
 
 class AppTextStylesDefault implements AppTextStyles {
@@ -85,5 +87,19 @@ class AppTextStylesDefault implements AppTextStyles {
         fontSize: 15,
         fontWeight: FontWeight.w600,
         color: AppTheme.colors.eventTileTitle,
+      );
+
+  @override
+  TextStyle get stepperIndicatorPrimary => GoogleFonts.roboto(
+        fontSize: 14,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.stepperIndicatorPrimary,
+      );
+
+  @override
+  TextStyle get stepperIndicatorSecondary => GoogleFonts.roboto(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: AppTheme.colors.stepperIndicatorSecondary,
       );
 }
