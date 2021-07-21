@@ -4,6 +4,7 @@ import 'package:split_it/modules/home/home_state.dart';
 import 'package:split_it/modules/home/widgets/app_bar/app_bar_widget.dart';
 import 'package:split_it/modules/home/widgets/event_tile_widget.dart';
 import 'package:split_it/modules/login/models/user_model.dart';
+import 'package:split_it/shared/models/event_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     controller.getEvents();
-    controller.listen((state) => setState((){}));
+    controller.listen((state) => setState(() {}));
     super.initState();
   }
 
@@ -38,13 +39,17 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               if (controller.state is HomeStateLoading) ...[
-                Center(
-                  child: CircularProgressIndicator(),
-                )
+                ...List.generate(
+                    4,
+                    (index) =>
+                        EventTileWidget(event: EventModel(), isLoading: true))
               ] else if (controller.state is HomeStateSuccess) ...[
                 ...(controller.state as HomeStateSuccess)
                     .events
-                    .map((event) => EventTileWidget(event: event))
+                    .map((event) => EventTileWidget(
+                          event: event,
+                          isLoading: false,
+                        ))
               ] else if (controller.state is HomeStateFailure) ...[
                 Text((controller.state as HomeStateFailure).message)
               ] else ...[

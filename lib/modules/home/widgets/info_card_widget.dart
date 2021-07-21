@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:split_it/modules/home/widgets/icon_dolar_widget.dart';
 import 'package:split_it/theme/app_theme.dart';
+
+import 'loading_widget.dart';
 
 class InfoCardWidget extends StatelessWidget {
   final double value;
@@ -49,17 +50,9 @@ class InfoCardWidget extends StatelessWidget {
                 height: 4,
               ),
               if (isLoading) ...[
-                SizedBox(
-                  width: 98,
-                  height: 24,
-                  child: Shimmer.fromColors(
-                    baseColor: Colors.grey.shade300,
-                    highlightColor: Colors.white,
-                    child: Container(
-                      color: Colors.grey,
-                    ),
-                  ),
-                )
+                LoadingWidget(
+                  size: Size(94, 24),
+                ),
               ] else
                 Text(
                   "R\$ ${value.toStringAsFixed(2)}",
