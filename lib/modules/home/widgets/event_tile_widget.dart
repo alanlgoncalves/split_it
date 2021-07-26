@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:split_it/modules/home/widgets/icon_dolar_widget.dart';
 import 'package:split_it/shared/models/event_model.dart';
 import 'package:split_it/theme/app_theme.dart';
@@ -9,7 +10,8 @@ class EventTileWidget extends StatelessWidget {
   final EventModel event;
   final bool isLoading;
 
-  const EventTileWidget({Key? key, required this.event, required this.isLoading})
+  const EventTileWidget(
+      {Key? key, required this.event, required this.isLoading})
       : super(key: key);
 
   IconDollarType get type =>
@@ -71,14 +73,15 @@ class EventTileWidget extends StatelessWidget {
                     style: AppTheme.textStyles.eventTileSubtitle,
                   ),
                   subtitle: Text(
-                    event.createdAt!.toIso8601String(),
+                    DateFormat('MMMMd').format(event.createdAt!),
                     style: AppTheme.textStyles.eventTileSubtitle,
                   ),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "R\$ ${event.value!.toStringAsFixed(2)}",
+                        NumberFormat.simpleCurrency()
+                            .format(event.value!.abs()),
                         style: AppTheme.textStyles.eventTileMoney,
                       ),
                       SizedBox(

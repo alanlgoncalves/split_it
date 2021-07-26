@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class SplashPage extends StatefulWidget {
@@ -10,6 +12,8 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   void initializeFirebase() async {
     try {
+      Intl.defaultLocale = 'pt_BR';
+      initializeDateFormatting();
       await Firebase.initializeApp();
       await Future.delayed(Duration(seconds: 2));
       Navigator.pushReplacementNamed(context, "/login");

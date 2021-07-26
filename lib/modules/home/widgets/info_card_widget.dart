@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:split_it/modules/home/widgets/icon_dolar_widget.dart';
 import 'package:split_it/theme/app_theme.dart';
 
@@ -55,7 +56,7 @@ class InfoCardWidget extends StatelessWidget {
                 ),
               ] else
                 Text(
-                  "R\$ ${value.toStringAsFixed(2)}",
+                  NumberFormat.simpleCurrency().format(value.abs()),
                   style: textStyle,
                 ),
             ],

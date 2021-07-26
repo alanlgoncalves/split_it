@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:split_it/modules/create_split/widgets/step_input_text.dart';
 import 'package:split_it/modules/create_split/widgets/step_title_widget.dart';
 
@@ -38,7 +39,7 @@ class _StepTheePageState extends State<StepTheePage> {
               ),
               Expanded(
                 child: StepInputTextWidget(
-                    hintText: "R\$ 0,00",
+                    hintText: NumberFormat.simpleCurrency().format(0),
                     textAlign: TextAlign.start,
                     padding: EdgeInsets.zero,
                     onChange: (eventName) {}),

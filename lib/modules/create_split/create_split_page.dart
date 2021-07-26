@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:split_it/modules/create_split/create_split_controller.dart';
-import 'package:split_it/modules/create_split/steps/two/step_three_page.dart';
+import 'package:split_it/modules/create_split/steps/three/step_three_page.dart';
 import 'package:split_it/modules/create_split/steps/two/step_two_page.dart';
 import 'package:split_it/modules/create_split/widgets/bottom_stepper_bar.dart';
 import 'package:split_it/modules/create_split/widgets/create_split_appbar.dart';
