@@ -23,6 +23,11 @@ abstract class AppColors {
   Color get stepperIndicatorSecondary;
   Color get stepperBackButton;
   Color get stepperNextButton;
+  Color get stepperTitlePrimary;
+  Color get stepperTitleSecondary;
+  Color get stepperHintTextField;
+  Color get stepperTextField;
+  Color get inputBorder;
 }
 
 class AppColorsDefault implements AppColors {
@@ -91,4 +96,19 @@ class AppColorsDefault implements AppColors {
 
   @override
   Color get stepperNextButton => Color(0xFF455250);
+
+  @override
+  Color get stepperTitlePrimary => Color(0xFF455250);
+
+  @override
+  Color get stepperTitleSecondary => Color(0xFF455250);
+
+  @override
+  Color get stepperHintTextField => Color(0xFF666666);
+
+  @override
+  Color get stepperTextField => Color(0xFF455250);
+
+  @override
+  Color get inputBorder => Color(0xFF455250);
 }
