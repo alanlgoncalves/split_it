@@ -16,6 +16,7 @@ abstract class AppTextStyles {
   TextStyle get eventTileFriends;
   TextStyle get stepperIndicatorPrimary;
   TextStyle get stepperIndicatorSecondary;
+  TextStyle get stepperNextButton;
 }
 
 class AppTextStylesDefault implements AppTextStyles {
@@ -101,5 +102,12 @@ class AppTextStylesDefault implements AppTextStyles {
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: AppTheme.colors.stepperIndicatorSecondary,
+      );
+
+  @override
+  TextStyle get stepperNextButton => GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: AppTheme.colors.stepperNextButton,
       );
 }
