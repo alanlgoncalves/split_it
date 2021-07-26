@@ -1,31 +1,30 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:split_it/modules/create_split/widgets/step_input_text.dart';
 import 'package:split_it/modules/create_split/widgets/step_title_widget.dart';
 
-class StepOnePage extends StatefulWidget {
+class StepTwoPage extends StatefulWidget {
   final void Function(String value) onChange;
 
-  const StepOnePage({Key? key, required this.onChange}) : super(key: key);
+  const StepTwoPage({Key? key, required this.onChange}) : super(key: key);
 
   @override
-  _StepOnePageState createState() => _StepOnePageState();
+  _StepTwoPageState createState() => _StepTwoPageState();
 }
 
-class _StepOnePageState extends State<StepOnePage> {
+class _StepTwoPageState extends State<StepTwoPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         StepTitleWidget(
-          titleFirstLine: "Qual o nome",
-          titleSecondLine: "do evento?",
+          titleFirstLine: "Com quem",
+          titleSecondLine: "você quer dividir?",
         ),
         SizedBox(
           height: 40,
         ),
         StepInputTextWidget(
-          hintText: "Ex: Churrasco",
+          hintText: "Nome da pessoa",
           onChange: widget.onChange,
         ),
       ],
