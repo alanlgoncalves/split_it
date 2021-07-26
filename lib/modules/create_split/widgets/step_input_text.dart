@@ -3,21 +3,27 @@ import 'package:split_it/theme/app_theme.dart';
 
 class StepInputTextWidget extends StatelessWidget {
   final String hintText;
+  final TextAlign textAlign;
+  final EdgeInsets? padding;
   final void Function(String value) onChange;
 
   const StepInputTextWidget(
-      {Key? key, required this.hintText, required this.onChange})
+      {Key? key,
+      required this.hintText,
+      required this.onChange,
+      this.textAlign = TextAlign.center,
+      this.padding})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 64),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: 64),
       child: TextField(
         onChanged: onChange,
         style: AppTheme.textStyles.stepperTextField,
         cursorColor: AppTheme.colors.backgroundSecondary,
-        textAlign: TextAlign.center,
+        textAlign: textAlign,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: AppTheme.textStyles.stepperHintTextField,
