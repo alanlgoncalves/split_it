@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:split_it/modules/create_split/widgets/create_split_appbar.dart';
 import 'package:split_it/modules/create_split/widgets/stepper_next_button.dart';
 import 'package:split_it/theme/app_theme.dart';
 
@@ -42,42 +43,10 @@ class _CreateSplitPageState extends State<CreateSplitPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.colors.backgroundPrimary,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: AppTheme.colors.stepperBackButton,
-                  ),
-                  onPressed: () {
-                    backPage();
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 24),
-                child: Text.rich(
-                  TextSpan(
-                    text: "0${index + 1}",
-                    style: AppTheme.textStyles.stepperIndicatorPrimary,
-                    children: [
-                      TextSpan(
-                        text: " - 0${pages.length}",
-                        style: AppTheme.textStyles.stepperIndicatorSecondary,
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+      appBar: CreateSplitAppbarWidget(
+        actualPage: index,
+        size: pages.length,
+        onTapBack: backPage,
       ),
       body: Center(child: pages[index]),
       bottomNavigationBar: SafeArea(
