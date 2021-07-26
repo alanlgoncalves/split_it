@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:split_it/modules/create_split/create_split_controller.dart';
 import 'package:split_it/modules/create_split/widgets/bottom_stepper_bar.dart';
 import 'package:split_it/modules/create_split/widgets/create_split_appbar.dart';
 import 'package:split_it/theme/app_theme.dart';
@@ -13,17 +14,28 @@ class CreateSplitPage extends StatefulWidget {
 }
 
 class _CreateSplitPageState extends State<CreateSplitPage> {
-  final pages = [
-    StepOnePage(),
-    Container(
-      color: Colors.purple,
-    ),
-    Container(
-      color: Colors.yellow,
-    ),
-  ];
+  final controller = CreateSplitController();
+  late List<Widget> pages;
 
   var index = 0;
+
+  @override
+  void initState() {
+    pages = [
+      StepOnePage(onChange: (eventName) {
+        controller.setEventName(eventName);
+        setState(() {});
+      }),
+      Container(
+        color: Colors.purple,
+      ),
+      Container(
+        color: Colors.yellow,
+      ),
+    ];
+
+    super.initState();
+  }
 
   void nextPage() {
     if (index < 2) {
@@ -51,6 +63,7 @@ class _CreateSplitPageState extends State<CreateSplitPage> {
       body: Center(child: pages[index]),
       bottomNavigationBar: SafeArea(
           child: BottomStepperBarWidget(
+        enableButtons: controller.enableNavigateButton(),
         onTapCancel: () {},
         onTapNext: nextPage,
       )),
