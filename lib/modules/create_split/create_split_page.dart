@@ -48,6 +48,8 @@ class _CreateSplitPageState extends State<CreateSplitPage> {
     if (index > 0) {
       index--;
       setState(() {});
+    } else {
+      Navigator.pop(context);
     }
   }
 
