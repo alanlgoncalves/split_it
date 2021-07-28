@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 
 abstract class AppGradients {
+  // Splash Page
   Gradient get background;
 }
 

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
+  // Shared
   Color get backgroundPrimary;
   Color get backgroundSecondary;
+
+  //Home Page
   Color get title;
   Color get infoCardTitle;
   Color get infoCardSubtitle1;
@@ -19,6 +22,8 @@ abstract class AppColors {
   Color get eventTileMoney;
   Color get eventTileFriends;
   Color get divider;
+
+  //Group Page
   Color get stepperIndicatorPrimary;
   Color get stepperIndicatorSecondary;
   Color get stepperBackButton;
@@ -29,10 +34,24 @@ abstract class AppColors {
   Color get stepperHintTextField;
   Color get stepperTextField;
   Color get inputBorder;
+
+  // Group Page
   Color get groupBackButton;
   Color get groupActionButton;
   Color get groupAppBarTitle;
   Color get groupSpacesDivider;
+  Color get groupDivider;
+  Color get sectionTitle;
+  Color get personName;
+  Color get personValuePositive;
+  Color get personValueNegative;
+  Color get itemName;
+  Color get itemValue;
+  Color get remainingValue;
+  Color get checkboxActive;
+  Color get checkboxInactive;
+  Color get checkboxBorderActive;
+  Color get checkboxBorderInactive;
 }
 
 class AppColorsDefault implements AppColors {
@@ -131,4 +150,40 @@ class AppColorsDefault implements AppColors {
 
   @override
   Color get groupSpacesDivider => Color(0xFF455250).withOpacity(0.08);
+
+  @override
+  Color get sectionTitle => Color(0xFF455250);
+
+  @override
+  Color get itemName => Color(0xFF666666);
+
+  @override
+  Color get itemValue => Color(0xFF666666);
+
+  @override
+  Color get personName => Color(0xFF666666);
+
+  @override
+  Color get personValuePositive => Color(0xFF40B28C);
+
+  @override
+  Color get personValueNegative => Color(0xFFE83F5B);
+
+  @override
+  Color get remainingValue => Color(0xFFE83F5B);
+
+  @override
+  Color get checkboxActive => Color(0xFFE0F3EE);
+
+  @override
+  Color get checkboxInactive => Color(0xFFF0F1F1);
+
+  @override
+  Color get checkboxBorderActive => Color(0xFFD6D6D6);
+
+  @override
+  Color get checkboxBorderInactive => Color(0xFFF0F1F1);
+
+  @override
+  Color get groupDivider => Color(0xFF666666).withOpacity(0.2);
 }

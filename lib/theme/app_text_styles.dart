@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_theme.dart';
 
 abstract class AppTextStyles {
+  //Home Screen Page
   TextStyle get title;
   TextStyle get button;
   TextStyle get appBar;
@@ -14,6 +15,8 @@ abstract class AppTextStyles {
   TextStyle get eventTileSubtitle;
   TextStyle get eventTileMoney;
   TextStyle get eventTileFriends;
+
+  //Stepper Page
   TextStyle get stepperIndicatorPrimary;
   TextStyle get stepperIndicatorSecondary;
   TextStyle get stepperNextButton;
@@ -22,7 +25,17 @@ abstract class AppTextStyles {
   TextStyle get stepperTitleSecondary;
   TextStyle get stepperHintTextField;
   TextStyle get stepperTextField;
+
+  //Group Page
   TextStyle get groupAppBarTitle;
+  TextStyle get sectionTitle;
+  TextStyle get personName;
+  TextStyle get personValuePositive;
+  TextStyle get personValueNegative;
+  TextStyle get itemName;
+  TextStyle get currencySymbol;
+  TextStyle get itemValue;
+  TextStyle get remainingValue;
 }
 
 class AppTextStylesDefault implements AppTextStyles {
@@ -157,5 +170,61 @@ class AppTextStylesDefault implements AppTextStyles {
         fontSize: 22,
         fontWeight: FontWeight.w700,
         color: AppTheme.colors.groupAppBarTitle,
+      );
+
+  @override
+  TextStyle get currencySymbol => GoogleFonts.roboto(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: AppTheme.colors.itemValue,
+      );
+
+  @override
+  TextStyle get itemName => GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: AppTheme.colors.itemName,
+      );
+
+  @override
+  TextStyle get itemValue => GoogleFonts.roboto(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: AppTheme.colors.itemName,
+      );
+
+  @override
+  TextStyle get personName => GoogleFonts.roboto(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: AppTheme.colors.personName,
+      );
+
+  @override
+  TextStyle get personValueNegative => GoogleFonts.roboto(
+        fontSize: 12,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.personValueNegative,
+      );
+
+  @override
+  TextStyle get personValuePositive => GoogleFonts.roboto(
+        fontSize: 12,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.personValuePositive,
+      );
+
+  @override
+  TextStyle get remainingValue => GoogleFonts.roboto(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.remainingValue,
+      );
+
+  @override
+  TextStyle get sectionTitle => GoogleFonts.roboto(
+        fontSize: 14,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.sectionTitle,
       );
 }

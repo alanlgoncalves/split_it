@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:split_it/modules/group/widgets/group_appbar.dart';
-import 'package:split_it/modules/group/widgets/person_tile.dart';
+import 'package:split_it/modules/group/widgets/item_tile.dart';
+import 'package:split_it/modules/group/widgets/persons_section.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class GroupPage extends StatefulWidget {
@@ -29,27 +30,7 @@ class _GroupPageState extends State<GroupPage> {
                 height: 8,
                 color: AppTheme.colors.groupSpacesDivider,
               ),
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("Integrantes"),
-                      ],
-                    ),
-                    PersonTileWidget(
-                      name: "Você",
-                    ),
-                    PersonTileWidget(
-                      name: "João",
-                    ),
-                    PersonTileWidget(
-                      name: "José",
-                    ),
-                  ],
-                ),
-              ),
+              PersonSectionWidget(),
               Container(
                 height: 8,
                 color: AppTheme.colors.groupSpacesDivider,
@@ -65,7 +46,10 @@ class _GroupPageState extends State<GroupPage> {
                   children: [
                     Row(
                       children: [
-                        Text("Ítens"),
+                        Text(
+                          "ÍTENS",
+                          style: AppTheme.textStyles.sectionTitle,
+                        ),
                       ],
                     ),
                   ],
@@ -73,43 +57,55 @@ class _GroupPageState extends State<GroupPage> {
               ),
               Container(
                 height: 1,
-                color: AppTheme.colors.groupSpacesDivider,
+                color: AppTheme.colors.groupDivider,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
                   children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Picanha"),
-                      trailing: Text("R\$122,00"),
+                    ItemTileWidget(
+                      name: "Picanha",
+                      value: 122,
                     ),
                     Container(
                       height: 1,
-                      color: AppTheme.colors.groupSpacesDivider,
+                      color: AppTheme.colors.groupDivider,
                     ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Linguiça"),
-                      trailing: Text("R\$122,00"),
-                    ),
-                    Container(
-                      height: 1,
-                      color: AppTheme.colors.groupSpacesDivider,
-                    ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Carvão"),
-                      trailing: Text("R\$122,00"),
+                    ItemTileWidget(
+                      name: "Linguicinha",
+                      value: 17,
                     ),
                     Container(
                       height: 1,
-                      color: AppTheme.colors.groupSpacesDivider,
+                      color: AppTheme.colors.groupDivider,
                     ),
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text("Cerveja"),
-                      trailing: Text("R\$122,00"),
+                    ItemTileWidget(
+                      name: "Carvão",
+                      value: 19,
+                    ),
+                    Container(
+                      height: 1,
+                      color: AppTheme.colors.groupDivider,
+                    ),
+                    ItemTileWidget(
+                      name: "Cerveja",
+                      value: 68,
+                    ),
+                    Container(
+                      height: 1,
+                      color: AppTheme.colors.groupDivider,
+                    ),
+                    ItemTileWidget(
+                      name: "Refrigerante",
+                      value: 12,
+                    ),
+                    Container(
+                      height: 1,
+                      color: AppTheme.colors.groupDivider,
+                    ),
+                    ItemTileWidget(
+                      name: "Pão de alho",
+                      value: 15,
                     ),
                   ],
                 ),
@@ -121,8 +117,19 @@ class _GroupPageState extends State<GroupPage> {
                   child: Column(children: [
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text("Total"),
-                      trailing: Text("R\$122,00"),
+                      title:
+                          Text("Total", style: AppTheme.textStyles.itemValue),
+                      trailing: Text.rich(
+                        TextSpan(
+                          text: "R\$",
+                          style: AppTheme.textStyles.currencySymbol,
+                          children: [
+                            TextSpan(
+                                text: "122,00",
+                                style: AppTheme.textStyles.itemValue)
+                          ],
+                        ),
+                      ),
                     ),
                   ]),
                 ),
@@ -139,7 +146,10 @@ class _GroupPageState extends State<GroupPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("Faltam R\$126,00"),
+                        Text(
+                          "Faltam R\$126,00",
+                          style: AppTheme.textStyles.remainingValue,
+                        ),
                       ],
                     ),
                   ],

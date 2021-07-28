@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:split_it/theme/app_theme.dart';
 
 class PersonTileWidget extends StatefulWidget {
   final String name;
-  final bool isRemovable;
+  final double value;
 
-  const PersonTileWidget(
-      {Key? key, required this.name, this.isRemovable = false})
+  const PersonTileWidget({Key? key, required this.name, required this.value})
       : super(key: key);
 
   @override
@@ -13,11 +14,26 @@ class PersonTileWidget extends StatefulWidget {
 }
 
 class _PersonTileWidgetState extends State<PersonTileWidget> {
-  bool? isChecked = false;
+  bool? isChecked;
 
-  Color get checkboxColor => isChecked! ? Color(0xFFE0F3EE) : Color(0xFFF0F1F1);
-  Color get checkboxBorderColor =>
-      isChecked! ? Color(0xFFD6D6D6) : Color(0xFFF0F1F1);
+  Color get checkboxColor => isChecked!
+      ? AppTheme.colors.checkboxActive
+      : AppTheme.colors.checkboxInactive;
+
+  Color get checkboxBorderColor => isChecked!
+      ? AppTheme.colors.checkboxBorderActive
+      : AppTheme.colors.checkboxBorderInactive;
+
+  TextStyle get valueTextStyle => isChecked!
+      ? AppTheme.textStyles.personValuePositive
+      : AppTheme.textStyles.personValueNegative;
+
+  @override
+  void initState() {
+    isChecked = !widget.value.isNegative;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +47,14 @@ class _PersonTileWidgetState extends State<PersonTileWidget> {
             color: Colors.grey.shade200,
           ),
         ),
-        title: Text(this.widget.name),
-        subtitle: Text("R\$126,00"),
+        title: Text(
+          this.widget.name,
+          style: AppTheme.textStyles.personName,
+        ),
+        subtitle: Text(
+          NumberFormat.simpleCurrency().format(widget.value.abs()),
+          style: valueTextStyle,
+        ),
         trailing: Container(
           height: 40,
           width: 40,
