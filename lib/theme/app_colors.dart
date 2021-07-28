@@ -29,6 +29,10 @@ abstract class AppColors {
   Color get stepperHintTextField;
   Color get stepperTextField;
   Color get inputBorder;
+  Color get groupBackButton;
+  Color get groupActionButton;
+  Color get groupAppBarTitle;
+  Color get groupSpacesDivider;
 }
 
 class AppColorsDefault implements AppColors {
@@ -115,4 +119,16 @@ class AppColorsDefault implements AppColors {
 
   @override
   Color get stepperNextButtonDisabled => Color(0xFF666666);
+
+  @override
+  Color get groupActionButton => Color(0xFF455250);
+
+  @override
+  Color get groupBackButton => Color(0xFF666666);
+
+  @override
+  Color get groupAppBarTitle => Color(0xFF455250);
+
+  @override
+  Color get groupSpacesDivider => Color(0xFF455250).withOpacity(0.08);
 }

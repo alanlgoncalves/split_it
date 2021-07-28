@@ -22,6 +22,7 @@ abstract class AppTextStyles {
   TextStyle get stepperTitleSecondary;
   TextStyle get stepperHintTextField;
   TextStyle get stepperTextField;
+  TextStyle get groupAppBarTitle;
 }
 
 class AppTextStylesDefault implements AppTextStyles {
@@ -149,5 +150,12 @@ class AppTextStylesDefault implements AppTextStyles {
         fontSize: 12,
         fontWeight: FontWeight.w500,
         color: AppTheme.colors.stepperNextButtonDisabled,
+      );
+
+  @override
+  TextStyle get groupAppBarTitle => GoogleFonts.montserrat(
+        fontSize: 22,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.groupAppBarTitle,
       );
 }
