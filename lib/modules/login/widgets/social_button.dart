@@ -32,16 +32,13 @@ class SocialButtonWidget extends StatelessWidget {
               height: 56,
               child: Row(
                 children: [
-                  SizedBox(
-                    width: 16,
-                  ),
-                  Image.asset(
-                    imagePath,
-                    width: 24,
-                    height: 24,
-                  ),
-                  SizedBox(
-                    width: 16,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Image.asset(
+                      imagePath,
+                      width: 24,
+                      height: 24,
+                    ),
                   ),
                   Container(
                     width: 1,
