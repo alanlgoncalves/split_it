@@ -81,13 +81,18 @@ class _HomePageState extends State<HomePage> {
                         ...List.generate(
                             4,
                             (index) => EventTileWidget(
-                                event: EventModel(), isLoading: true))
+                                  event: EventModel(),
+                                  isLoading: true,
+                                ))
                       ] else if (controller.state is HomeStateSuccess) ...[
                         ...(controller.state as HomeStateSuccess)
                             .events
                             .map((event) => EventTileWidget(
                                   event: event,
                                   isLoading: false,
+                                  onTap: () {
+                                    Navigator.pushNamed(context, "/group");
+                                  },
                                 ))
                       ] else if (controller.state is HomeStateFailure) ...[
                         Text((controller.state as HomeStateFailure).message)
