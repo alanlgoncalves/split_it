@@ -1,36 +1,30 @@
+import 'package:mobx/mobx.dart';
 import 'package:split_it/modules/home/home_state.dart';
 import 'package:split_it/modules/home/repositories/home_repository.dart';
 import 'package:split_it/modules/home/repositories/home_repository_mock.dart';
 
-class HomeController {
+part 'home_controller.g.dart';
+
+class HomeController = _HomeControllerBase with _$HomeController;
+
+abstract class _HomeControllerBase with Store {
   late HomeRepository repository;
-  Function(HomeState state)? onListen;
 
-  HomeState state = HomeStateEmpty();
-
-  HomeController({HomeRepository? repository}) {
+  _HomeControllerBase({HomeRepository? repository}) {
     this.repository = repository ?? HomeRepositoryMock();
   }
 
+  @observable
+  HomeState state = HomeStateEmpty();
+
+  @action
   getEvents() async {
-    update(HomeStateLoading());
+    state = HomeStateLoading();
     try {
       final response = await repository.getEvents();
-      update(HomeStateSuccess(events: response));
+      state = HomeStateSuccess(events: response);
     } catch (e) {
-      update(HomeStateFailure(message: e.toString()));
+      state = HomeStateFailure(message: e.toString());
     }
-  }
-
-  void update(HomeState state) {
-    this.state = state;
-
-    if (onListen != null) {
-      onListen!(state);
-    }
-  }
-
-  void listen(Function(HomeState state) onChange) {
-    onListen = onChange;
   }
 }
