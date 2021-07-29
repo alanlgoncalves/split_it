@@ -8,12 +8,12 @@ import 'package:split_it/modules/login/models/user_model.dart';
 class LoginServiceMock extends Mock implements LoginService {}
 
 void main() {
-  late LoginController controller;
+  late LoginControllerBase controller;
   late LoginService service;
 
   setUp(() {
     service = LoginServiceMock();
-    controller = LoginController(service: service, onUpdate: () {});
+    controller = LoginControllerBase(service: service, onUpdate: () {});
   });
 
   test("Testing Google sign in return success", () async {
