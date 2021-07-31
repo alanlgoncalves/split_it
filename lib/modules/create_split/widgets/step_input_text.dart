@@ -3,6 +3,7 @@ import 'package:split_it/theme/app_theme.dart';
 
 class StepInputTextWidget extends StatelessWidget {
   final String hintText;
+  final String? text;
   final TextAlign textAlign;
   final EdgeInsets? padding;
   final void Function(String value) onChange;
@@ -11,6 +12,7 @@ class StepInputTextWidget extends StatelessWidget {
       {Key? key,
       required this.hintText,
       required this.onChange,
+      this.text,
       this.textAlign = TextAlign.center,
       this.padding})
       : super(key: key);
@@ -24,6 +26,7 @@ class StepInputTextWidget extends StatelessWidget {
         style: AppTheme.textStyles.stepperTextField,
         cursorColor: AppTheme.colors.backgroundSecondary,
         textAlign: textAlign,
+        controller: TextEditingController(text: this.text),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: AppTheme.textStyles.stepperHintTextField,
