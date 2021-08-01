@@ -26,7 +26,7 @@ class _CreateSplitPageState extends State<CreateSplitPage> {
       StepOnePage(
         controller: controller,
       ),
-      StepTwoPage(onChange: (eventName) {}),
+      StepTwoPage(),
       StepTheePage(),
     ];
 
