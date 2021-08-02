@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:split_it/shared/models/models/base_model.dart';
+import 'package:split_it/shared/models/base_model.dart';
 
 class FirebaseRepository {
   FirebaseFirestore get firestore => FirebaseFirestore.instance;
