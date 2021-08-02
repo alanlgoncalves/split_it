@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:split_it/modules/create_split/widgets/step_input_text.dart';
+import 'package:split_it/modules/create_split/widgets/step_item_input.dart';
 import 'package:split_it/modules/create_split/widgets/step_title_widget.dart';
 
 class StepTheePage extends StatefulWidget {
@@ -21,33 +20,11 @@ class _StepTheePageState extends State<StepTheePage> {
         SizedBox(
           height: 40,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 24),
-                child: Text("1"),
-              ),
-              Expanded(
-                flex: 3,
-                child: StepInputTextWidget(
-                    hintText: "Ex: Picanha",
-                    textAlign: TextAlign.start,
-                    padding: EdgeInsets.zero,
-                    onChange: (eventName) {}),
-              ),
-              Expanded(
-                child: StepInputTextWidget(
-                    hintText: NumberFormat.simpleCurrency().format(0),
-                    textAlign: TextAlign.start,
-                    padding: EdgeInsets.zero,
-                    onChange: (eventName) {}),
-              ),
-              IconButton(icon: Icon(Icons.delete), onPressed: () {}),
-            ],
-          ),
-        )
+        StepItemInputTextWidget(
+          number: 0,
+          onItemNameChange: (value) {},
+          onItemValueChange: (value) {},
+        ),
       ],
     );
   }
