@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:split_it/shared/models/friend_model.dart';
 
 part 'create_split_controller.g.dart';
 
@@ -11,6 +12,9 @@ abstract class _CreateSplitControllerBase with Store {
 
   @observable
   String eventName = "";
+
+  @observable
+  List<FriendModel> selectedFriends = [];
 
   @action
   void nextPage() {
@@ -28,11 +32,23 @@ abstract class _CreateSplitControllerBase with Store {
 
   @computed
   bool get enableNavigateButton {
-    return eventName.isNotEmpty;
+    switch (currentPage) {
+      case 0:
+        return eventName.isNotEmpty;
+      case 1:
+        return selectedFriends.isNotEmpty;
+      default:
+        return false;
+    }
   }
 
   @action
   void setEventName(String eventName) {
     this.eventName = eventName;
+  }
+
+  @action
+  void setSelectedFriends(List<FriendModel> selectedFriends) {
+    this.selectedFriends = selectedFriends;
   }
 }

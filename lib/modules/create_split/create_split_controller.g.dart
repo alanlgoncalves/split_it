@@ -48,6 +48,22 @@ mixin _$CreateSplitController on _CreateSplitControllerBase, Store {
     });
   }
 
+  final _$selectedFriendsAtom =
+      Atom(name: '_CreateSplitControllerBase.selectedFriends');
+
+  @override
+  List<FriendModel> get selectedFriends {
+    _$selectedFriendsAtom.reportRead();
+    return super.selectedFriends;
+  }
+
+  @override
+  set selectedFriends(List<FriendModel> value) {
+    _$selectedFriendsAtom.reportWrite(value, super.selectedFriends, () {
+      super.selectedFriends = value;
+    });
+  }
+
   final _$_CreateSplitControllerBaseActionController =
       ActionController(name: '_CreateSplitControllerBase');
 
@@ -85,10 +101,22 @@ mixin _$CreateSplitController on _CreateSplitControllerBase, Store {
   }
 
   @override
+  void setSelectedFriends(List<FriendModel> selectedFriends) {
+    final _$actionInfo = _$_CreateSplitControllerBaseActionController
+        .startAction(name: '_CreateSplitControllerBase.setSelectedFriends');
+    try {
+      return super.setSelectedFriends(selectedFriends);
+    } finally {
+      _$_CreateSplitControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentPage: ${currentPage},
 eventName: ${eventName},
+selectedFriends: ${selectedFriends},
 enableNavigateButton: ${enableNavigateButton}
     ''';
   }

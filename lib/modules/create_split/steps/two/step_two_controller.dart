@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:split_it/modules/create_split/create_split_controller.dart';
 import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/shared/repositories/firebase_repository.dart';
 part 'step_two_controller.g.dart';
@@ -7,6 +8,7 @@ class StepTwoController = _StepTwoControllerBase with _$StepTwoController;
 
 abstract class _StepTwoControllerBase with Store {
   final repository = FirebaseRepository();
+  final CreateSplitController controller;
 
   @observable
   List<FriendModel> _friends = [];
@@ -18,6 +20,14 @@ abstract class _StepTwoControllerBase with Store {
 
   @observable
   String search = "";
+
+  _StepTwoControllerBase({required this.controller}) {
+    this._selectedFriends.addAll(controller.selectedFriends);
+
+    autorun((_) {
+      this.controller.setSelectedFriends(_selectedFriends);
+    });
+  }
 
   @action
   void onChange(String value) {
