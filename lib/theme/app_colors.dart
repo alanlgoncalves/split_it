@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  // Shared
+  //Shared
   Color get backgroundPrimary;
   Color get backgroundSecondary;
 
@@ -23,12 +23,13 @@ abstract class AppColors {
   Color get eventTileFriends;
   Color get divider;
 
-  //Group Page
+  //Stepper Page
   Color get stepperIndicatorPrimary;
   Color get stepperIndicatorSecondary;
   Color get stepperBackButton;
   Color get stepperNextButton;
   Color get stepperNextButtonDisabled;
+  Color get stepperNextHighlighted;
   Color get stepperTitlePrimary;
   Color get stepperTitleSecondary;
   Color get stepperHintTextField;
@@ -39,7 +40,7 @@ abstract class AppColors {
   Color get personTileTitle;
   Color get personTileTitleSelected;
 
-  // Group Page
+  //Group Page
   Color get groupBackButton;
   Color get groupActionButton;
   Color get groupAppBarTitle;
@@ -202,4 +203,7 @@ class AppColorsDefault implements AppColors {
 
   @override
   Color get personTileTitleSelected => Color(0xFF455250);
+
+  @override
+  Color get stepperNextHighlighted => Color(0xFF40B28C);
 }

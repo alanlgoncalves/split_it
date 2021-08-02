@@ -4,6 +4,7 @@ import 'package:split_it/theme/app_theme.dart';
 class StepInputTextWidget extends StatelessWidget {
   final String hintText;
   final TextAlign textAlign;
+  final String? initialText;
   final EdgeInsets? padding;
   final TextInputType? textInputType;
   final TextEditingController? controller;
@@ -16,14 +17,16 @@ class StepInputTextWidget extends StatelessWidget {
       this.controller,
       this.textAlign = TextAlign.center,
       this.padding,
-      this.textInputType = TextInputType.text})
+      this.textInputType = TextInputType.text,
+      this.initialText})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding ?? const EdgeInsets.symmetric(horizontal: 64),
-      child: TextField(
+      child: TextFormField(
+        initialValue: initialText,
         keyboardType: textInputType,
         onChanged: onChange,
         style: AppTheme.textStyles.stepperTextField,

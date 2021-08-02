@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:split_it/modules/create_split/widgets/step_input_text.dart';
 
-class StepItemInputTextWidget extends StatelessWidget {
+class StepItemInputTextWidget extends StatefulWidget {
   final int number;
+  final String? initialName;
+  final double? initialValue;
   final bool isRemovable;
   final ValueChanged<String> onItemNameChange;
   final ValueChanged<double> onItemValueChange;
@@ -14,10 +16,19 @@ class StepItemInputTextWidget extends StatelessWidget {
       required this.number,
       required this.onItemNameChange,
       required this.onItemValueChange,
-      this.isRemovable = false})
+      this.isRemovable = false,
+      this.initialName,
+      this.initialValue})
       : super(key: key);
 
-  final moneyController = MoneyMaskedTextController(
+  @override
+  _StepItemInputTextWidgetState createState() =>
+      _StepItemInputTextWidgetState();
+}
+
+class _StepItemInputTextWidgetState extends State<StepItemInputTextWidget> {
+  late MoneyMaskedTextController moneyController = MoneyMaskedTextController(
+    initialValue: widget.initialValue,
     leftSymbol: NumberFormat.simpleCurrency(locale: "pt_BR").currencySymbol,
     decimalSeparator: NumberFormat.simpleCurrency().symbols.DECIMAL_SEP,
   );
@@ -30,15 +41,16 @@ class StepItemInputTextWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 24),
-            child: Text("$number"),
+            child: Text("${widget.number}"),
           ),
           Expanded(
             flex: 3,
             child: StepInputTextWidget(
+                initialText: this.widget.initialName,
                 hintText: "Ex: Picanha",
                 textAlign: TextAlign.start,
                 padding: EdgeInsets.zero,
-                onChange: onItemNameChange),
+                onChange: widget.onItemNameChange),
           ),
           Expanded(
             child: StepInputTextWidget(
@@ -48,11 +60,11 @@ class StepItemInputTextWidget extends StatelessWidget {
               textInputType: TextInputType.number,
               controller: moneyController,
               onChange: (value) {
-                onItemValueChange(moneyController.numberValue);
+                widget.onItemValueChange(moneyController.numberValue);
               },
             ),
           ),
-          if (isRemovable)
+          if (widget.isRemovable)
             IconButton(icon: Icon(Icons.delete), onPressed: () {}),
         ],
       ),
