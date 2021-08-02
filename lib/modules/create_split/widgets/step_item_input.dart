@@ -44,7 +44,7 @@ class StepItemInputTextWidget extends StatelessWidget {
               textAlign: TextAlign.start,
               padding: EdgeInsets.zero,
               textInputType: TextInputType.number,
-              textEditingController: moneyController,
+              controller: moneyController,
               onChange: (value) {
                 onItemValueChange(moneyController.numberValue);
               },
