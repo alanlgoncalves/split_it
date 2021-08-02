@@ -17,60 +17,66 @@ class _StepTheePageState extends State<StepThreePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        StepTitleWidget(
-            titleFirstLine: "Qual ou quais",
-            titleSecondLine: "itens você quer dividir?"),
-        SizedBox(
-          height: 40,
-        ),
-        Observer(
-          builder: (_) {
-            return StepItemInputTextWidget(
-              key: UniqueKey(),
-              number: controller.currentIndex,
-              onItemNameChange: (name) {
-                controller.onChange(name: name);
-              },
-              onItemValueChange: (value) {
-                controller.onChange(value: value);
-              },
-            );
-          },
-        ),
-        Observer(
-          builder: (_) {
-            return Column(
-              children: [
-                for (var i = 0; i < controller.items.length; i++)
-                  StepItemInputTextWidget(
-                    number: i + 1,
-                    initialName: controller.items[i].name,
-                    initialValue: controller.items[i].value,
-                    onItemNameChange: (name) {},
-                    onItemValueChange: (value) {},
-                    isRemovable: true,
-                    onDelete: () {
-                      controller.removeItem(i);
-                    },
-                  ),
-              ],
-            );
-          },
-        ),
-        SizedBox(
-          height: 24,
-        ),
-        Observer(
-          builder: (_) => controller.showAddItemButton
-              ? AddTextButtonWidget(
-                  label: "Continuar",
-                  onPressed: controller.addItem,
-                )
-              : Container(),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          StepTitleWidget(
+              titleFirstLine: "Qual ou quais",
+              titleSecondLine: "itens você quer dividir?"),
+          SizedBox(
+            height: 40,
+          ),
+          Observer(
+            builder: (_) {
+              return StepItemInputTextWidget(
+                key: UniqueKey(),
+                number: controller.currentIndex,
+                onItemNameChange: (name) {
+                  controller.onChange(name: name);
+                },
+                onItemValueChange: (value) {
+                  controller.onChange(value: value);
+                },
+              );
+            },
+          ),
+          SizedBox(
+            height: 24,
+          ),
+          Observer(
+            builder: (_) => controller.showAddItemButton
+                ? AddTextButtonWidget(
+                    label: "Adicionar",
+                    onPressed: controller.addItem,
+                  )
+                : Container(),
+          ),
+          SizedBox(
+            height: 24,
+          ),
+          Observer(
+            builder: (_) {
+              return Column(
+                children: [
+                  for (var i = 0; i < controller.items.length; i++)
+                    StepItemInputTextWidget(
+                      key: Key(controller.items[i].hashCode.toString()),
+                      number: i + 1,
+                      initialName: controller.items[i].name,
+                      initialValue: controller.items[i].value,
+                      onItemNameChange: (name) {},
+                      onItemValueChange: (value) {},
+                      isRemovable: true,
+                      onDelete: () {
+                        controller.removeItem(i);
+                      },
+                    ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
