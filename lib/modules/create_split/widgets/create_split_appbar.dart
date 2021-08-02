@@ -7,7 +7,10 @@ class CreateSplitAppbarWidget extends PreferredSize {
   final CreateSplitController controller;
   final int size;
 
-  CreateSplitAppbarWidget({required this.size, required this.controller})
+  CreateSplitAppbarWidget(
+      {required BuildContext context,
+      required this.size,
+      required this.controller})
       : super(
           child: SafeArea(
             child: Row(
@@ -16,12 +19,15 @@ class CreateSplitAppbarWidget extends PreferredSize {
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: AppTheme.colors.stepperBackButton,
-                    ),
-                    onPressed: controller.backPage,
-                  ),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: AppTheme.colors.stepperBackButton,
+                      ),
+                      onPressed: () {
+                        controller.currentPage == 0
+                            ? Navigator.pop(context)
+                            : controller.backPage();
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 24),

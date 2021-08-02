@@ -38,6 +38,7 @@ class _CreateSplitPageState extends State<CreateSplitPage> {
     return Scaffold(
       backgroundColor: AppTheme.colors.backgroundPrimary,
       appBar: CreateSplitAppbarWidget(
+        context: context,
         controller: controller,
         size: pages.length,
       ),

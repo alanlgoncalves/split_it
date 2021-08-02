@@ -16,6 +16,13 @@ class _StepTwoPageState extends State<StepTwoPage> {
   final controller = StepTwoController();
 
   @override
+  void initState() {
+    this.controller.getFriends();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -27,16 +34,16 @@ class _StepTwoPageState extends State<StepTwoPage> {
           height: 40,
         ),
         StepInputTextWidget(
-            hintText: "Nome da pessoa", onChange: controller.getFriends),
+            hintText: "Nome da pessoa", onChange: controller.onChange),
         SizedBox(
           height: 35,
         ),
         Observer(builder: (_) {
-          if (controller.friends.isEmpty) {
+          if (controller.items.isEmpty) {
             return Text("Nenhum amigo(a) encontrado");
           } else {
             return Column(
-              children: controller.friends
+              children: controller.items
                   .map((e) => PersonTileWidget(name: e['name']))
                   .toList(),
             );
