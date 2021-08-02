@@ -10,6 +10,7 @@ class StepItemInputTextWidget extends StatefulWidget {
   final bool isRemovable;
   final ValueChanged<String> onItemNameChange;
   final ValueChanged<double> onItemValueChange;
+  final VoidCallback? onDelete;
 
   StepItemInputTextWidget(
       {Key? key,
@@ -18,7 +19,8 @@ class StepItemInputTextWidget extends StatefulWidget {
       required this.onItemValueChange,
       this.isRemovable = false,
       this.initialName,
-      this.initialValue})
+      this.initialValue,
+      this.onDelete})
       : super(key: key);
 
   @override
@@ -65,7 +67,7 @@ class _StepItemInputTextWidgetState extends State<StepItemInputTextWidget> {
             ),
           ),
           if (widget.isRemovable)
-            IconButton(icon: Icon(Icons.delete), onPressed: () {}),
+            IconButton(icon: Icon(Icons.delete), onPressed: widget.onDelete),
         ],
       ),
     );
