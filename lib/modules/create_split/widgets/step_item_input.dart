@@ -5,6 +5,7 @@ import 'package:split_it/modules/create_split/widgets/step_input_text.dart';
 
 class StepItemInputTextWidget extends StatelessWidget {
   final int number;
+  final bool isRemovable;
   final ValueChanged<String> onItemNameChange;
   final ValueChanged<double> onItemValueChange;
 
@@ -12,7 +13,8 @@ class StepItemInputTextWidget extends StatelessWidget {
       {Key? key,
       required this.number,
       required this.onItemNameChange,
-      required this.onItemValueChange})
+      required this.onItemValueChange,
+      this.isRemovable = false})
       : super(key: key);
 
   final moneyController = MoneyMaskedTextController(
@@ -28,7 +30,7 @@ class StepItemInputTextWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 24),
-            child: Text("1"),
+            child: Text("$number"),
           ),
           Expanded(
             flex: 3,
@@ -50,7 +52,8 @@ class StepItemInputTextWidget extends StatelessWidget {
               },
             ),
           ),
-          IconButton(icon: Icon(Icons.delete), onPressed: () {}),
+          if (isRemovable)
+            IconButton(icon: Icon(Icons.delete), onPressed: () {}),
         ],
       ),
     );
