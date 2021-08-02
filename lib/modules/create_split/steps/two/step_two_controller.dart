@@ -24,7 +24,10 @@ abstract class _StepTwoControllerBase with Store {
       return _friends;
     } else {
       final filteredList = _friends
-          .where((element) => element['name'].contains(search))
+          .where((element) => element['name']
+              .toString()
+              .toLowerCase()
+              .contains(search.toLowerCase()))
           .toList();
 
       return filteredList;
