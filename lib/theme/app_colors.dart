@@ -34,6 +34,10 @@ abstract class AppColors {
   Color get stepperHintTextField;
   Color get stepperTextField;
   Color get inputBorder;
+  Color get iconAdd;
+  Color get iconRemove;
+  Color get personTileTitle;
+  Color get personTileTitleSelected;
 
   // Group Page
   Color get groupBackButton;
@@ -186,4 +190,16 @@ class AppColorsDefault implements AppColors {
 
   @override
   Color get groupDivider => Color(0xFF666666).withOpacity(0.2);
+
+  @override
+  Color get iconAdd => Color(0xFF40B28C);
+
+  @override
+  Color get iconRemove => Color(0xFFE83F5B);
+
+  @override
+  Color get personTileTitle => Color(0xFF666666);
+
+  @override
+  Color get personTileTitleSelected => Color(0xFF455250);
 }

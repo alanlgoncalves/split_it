@@ -25,6 +25,8 @@ abstract class AppTextStyles {
   TextStyle get stepperTitleSecondary;
   TextStyle get stepperHintTextField;
   TextStyle get stepperTextField;
+  TextStyle get personTileTitle;
+  TextStyle get personTileTitleSelected;
 
   //Group Page
   TextStyle get groupAppBarTitle;
@@ -226,5 +228,19 @@ class AppTextStylesDefault implements AppTextStyles {
         fontSize: 14,
         fontWeight: FontWeight.w700,
         color: AppTheme.colors.sectionTitle,
+      );
+
+  @override
+  TextStyle get personTileTitle => GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: AppTheme.colors.personTileTitle,
+      );
+
+  @override
+  TextStyle get personTileTitleSelected => GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.personTileTitleSelected,
       );
 }
