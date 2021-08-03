@@ -31,4 +31,9 @@ abstract class _StepThreeControllerBase with Store {
   void onChange({String? name, double? value}) {
     item = item.copyWith(name: name, value: value);
   }
+
+  @action
+  void editItem({required int index, String? name, double? value}) {
+    items[index] = items[index].copyWith(name: name, value: value);
+  }
 }

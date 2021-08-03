@@ -64,8 +64,12 @@ class _StepTheePageState extends State<StepThreePage> {
                       number: i + 1,
                       initialName: controller.items[i].name,
                       initialValue: controller.items[i].value,
-                      onItemNameChange: (name) {},
-                      onItemValueChange: (value) {},
+                      onItemNameChange: (name) {
+                        controller.editItem(index: i, name: name);
+                      },
+                      onItemValueChange: (value) {
+                        controller.editItem(index: i, value: value);
+                      },
                       isRemovable: true,
                       onDelete: () {
                         controller.removeItem(i);

@@ -84,6 +84,17 @@ mixin _$StepThreeController on _StepThreeControllerBase, Store {
   }
 
   @override
+  void editItem({required int index, String? name, double? value}) {
+    final _$actionInfo = _$_StepThreeControllerBaseActionController.startAction(
+        name: '_StepThreeControllerBase.editItem');
+    try {
+      return super.editItem(index: index, name: name, value: value);
+    } finally {
+      _$_StepThreeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 items: ${items},
