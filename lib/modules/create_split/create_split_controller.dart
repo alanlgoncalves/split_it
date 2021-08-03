@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:split_it/shared/models/friend_model.dart';
+import 'package:split_it/shared/models/item_model.dart';
 
 part 'create_split_controller.g.dart';
 
@@ -15,6 +16,9 @@ abstract class _CreateSplitControllerBase with Store {
 
   @observable
   List<FriendModel> selectedFriends = [];
+
+  @observable
+  List<ItemModel> items = [];
 
   @action
   void nextPage() {
@@ -37,6 +41,8 @@ abstract class _CreateSplitControllerBase with Store {
         return eventName.isNotEmpty;
       case 1:
         return selectedFriends.isNotEmpty;
+      case 2:
+        return items.isNotEmpty;
       default:
         return false;
     }
@@ -50,5 +56,10 @@ abstract class _CreateSplitControllerBase with Store {
   @action
   void setSelectedFriends(List<FriendModel> selectedFriends) {
     this.selectedFriends = selectedFriends;
+  }
+
+  @action
+  void setItems(List<ItemModel> items) {
+    this.items = items;
   }
 }

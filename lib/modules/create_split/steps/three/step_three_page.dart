@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:split_it/modules/create_split/create_split_controller.dart';
 import 'package:split_it/modules/create_split/steps/three/step_three_controller.dart';
 import 'package:split_it/modules/create_split/widgets/add_text_button.dart';
 import 'package:split_it/modules/create_split/widgets/step_item_input.dart';
 import 'package:split_it/modules/create_split/widgets/step_title_widget.dart';
 
 class StepThreePage extends StatefulWidget {
-  const StepThreePage({Key? key}) : super(key: key);
+  final CreateSplitController controller;
+
+  const StepThreePage({Key? key, required this.controller}) : super(key: key);
 
   @override
   _StepTheePageState createState() => _StepTheePageState();
@@ -14,6 +18,15 @@ class StepThreePage extends StatefulWidget {
 
 class _StepTheePageState extends State<StepThreePage> {
   final controller = StepThreeController();
+
+  @override
+  void initState() {
+    autorun((_) {
+      widget.controller.setItems(controller.items.toList());
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
