@@ -1,18 +1,26 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/shared/models/item_model.dart';
 
-class EventModel {
+import 'base_model.dart';
+
+class EventModel extends BaseModel {
   final String name;
   final DateTime? createdAt;
   final double? value;
   final List<ItemModel> items;
   final List<FriendModel> friends;
 
-  int get friendsQuantity => friends?.length ?? 0;
+  int get friendsQuantity => friends.length;
+
+  double get splitValue => value! / friends.length;
+
+  double get itemsValue =>
+      items.map((e) => e.value).reduce((e1, e2) => e1 + e2);
 
   EventModel({
     this.name = "",
@@ -32,19 +40,20 @@ class EventModel {
     return EventModel(
       name: name ?? this.name,
       createdAt: createdAt ?? this.createdAt,
-      value: value ?? this.value,
+      value: itemsValue,
       items: items ?? this.items,
       friends: friends ?? this.friends,
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'createdAt': createdAt,
-      'value': value,
-      'items': items?.map((x) => x.toMap()).toList(),
-      'friends': friends?.map((x) => x.toMap()).toList(),
+      'createdAt': FieldValue.serverTimestamp(),
+      'value': itemsValue,
+      'items': items.map((x) => x.toMap()).toList(),
+      'friends': friends.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -90,4 +99,7 @@ class EventModel {
         items.hashCode ^
         friends.hashCode;
   }
+
+  @override
+  String get collection => "events";
 }

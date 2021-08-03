@@ -5,6 +5,7 @@ import 'package:split_it/modules/create_split/steps/three/step_three_page.dart';
 import 'package:split_it/modules/create_split/steps/two/step_two_page.dart';
 import 'package:split_it/modules/create_split/widgets/bottom_stepper_bar.dart';
 import 'package:split_it/modules/create_split/widgets/create_split_appbar.dart';
+import 'package:split_it/shared/repositories/firebase_repository.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 import 'steps/one/step_one_page.dart';
@@ -17,7 +18,8 @@ class CreateSplitPage extends StatefulWidget {
 }
 
 class _CreateSplitPageState extends State<CreateSplitPage> {
-  final controller = CreateSplitController();
+  final controller =
+      CreateSplitController(firebaseRepository: FirebaseRepository());
   late List<Widget> pages;
 
   @override
@@ -52,11 +54,10 @@ class _CreateSplitPageState extends State<CreateSplitPage> {
         },
       ),
       bottomNavigationBar: SafeArea(
-          child: BottomStepperBarWidget(
-        controller: controller,
-        onTapCancel: () {},
-        onTapNext: controller.nextPage,
-      )),
+        child: BottomStepperBarWidget(
+          controller: controller,
+        ),
+      ),
     );
   }
 }

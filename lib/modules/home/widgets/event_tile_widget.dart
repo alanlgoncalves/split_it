@@ -72,7 +72,7 @@ class EventTileWidget extends StatelessWidget {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     title: Text(
-                      event.name!,
+                      event.name,
                       style: AppTheme.textStyles.eventTileSubtitle,
                     ),
                     subtitle: Text(
