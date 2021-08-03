@@ -16,58 +16,49 @@ class HomeRepositoryMock extends HomeRepository {
 
     return [
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: 32.50,
-        friends: 1,
       ),
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: -32.50,
-        friends: 1,
       ),
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: 32.50,
-        friends: 1,
       ),
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: -32.50,
-        friends: 1,
       ),
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: 32.50,
-        friends: 1,
       ),
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: 32.50,
-        friends: 1,
       ),
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: 32.50,
-        friends: 1,
       ),
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: -32.50,
-        friends: 1,
       ),
       EventModel(
-        title: "Churrasco",
+        name: "Churrasco",
         createdAt: DateTime.now(),
         value: 32.50,
-        friends: 1,
       ),
     ];
   }

@@ -22,10 +22,10 @@ abstract class _StepTwoControllerBase with Store {
   String search = "";
 
   _StepTwoControllerBase({required this.controller}) {
-    this._selectedFriends.addAll(controller.selectedFriends);
+    this._selectedFriends.addAll(controller.event.friends);
 
     autorun((_) {
-      this.controller.setSelectedFriends(_selectedFriends);
+      this.controller.onChanged(friends: _selectedFriends);
     });
   }
 

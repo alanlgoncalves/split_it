@@ -72,7 +72,7 @@ class EventTileWidget extends StatelessWidget {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     title: Text(
-                      event.title!,
+                      event.name!,
                       style: AppTheme.textStyles.eventTileSubtitle,
                     ),
                     subtitle: Text(
@@ -91,7 +91,7 @@ class EventTileWidget extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          "${event.friends} ${event.friends! > 1 ? "amigos(as)" : "amigo(a)"}",
+                          "${event.friendsQuantity} ${event.friendsQuantity > 1 ? "amigos(as)" : "amigo(a)"}",
                           style: AppTheme.textStyles.eventTileFriends,
                         ),
                       ],

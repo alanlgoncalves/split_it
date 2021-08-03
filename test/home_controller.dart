@@ -26,10 +26,8 @@ void main() {
       states.add(controller.state);
     });
 
-    when(repository.getEvents).thenAnswer((_) async => [
-          EventModel(
-              title: "", createdAt: DateTime.now(), value: 100.00, friends: 1)
-        ]);
+    when(repository.getEvents).thenAnswer((_) async =>
+        [EventModel(name: "", createdAt: DateTime.now(), value: 100.00)]);
 
     await controller.getEvents();
 

@@ -28,9 +28,11 @@ class _StepOnePageState extends State<StepOnePage> {
         StepInputTextWidget(
           hintText: "Ex: Churrasco",
           controller: TextEditingController(
-            text: widget.controller.eventName,
+            text: widget.controller.event.name,
           ),
-          onChange: widget.controller.setEventName,
+          onChange: (name) {
+            widget.controller.onChanged(name: name);
+          },
         ),
       ],
     );
