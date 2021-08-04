@@ -30,9 +30,11 @@ class PersonTileWidget extends StatelessWidget {
                       size: Size(28, 28)) as ImageProvider,
               fit: this.friend.photoURL != null ? BoxFit.cover : BoxFit.none),
           color: AppTheme.colors.checkboxActive,
-          border: Border.fromBorderSide(
-            BorderSide(color: AppTheme.colors.checkboxBorderActive),
-          ),
+          border: this.friend.photoURL == null
+              ? Border.fromBorderSide(
+                  BorderSide(color: AppTheme.colors.checkboxBorderActive),
+                )
+              : null,
         ),
       ),
       title: Text(
