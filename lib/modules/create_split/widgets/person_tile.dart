@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/theme/app_theme.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class PersonTileWidget extends StatelessWidget {
   final FriendModel friend;
@@ -23,9 +24,15 @@ class PersonTileWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           image: DecorationImage(
-              image: NetworkImage(this.friend.photoURL ??
-                  "https://lh3.googleusercontent.com/proxy/TFDc8tiU20EmoJpfPyhph5WEw_fUdSfUVoR4PyOIoVJvYCWC2fYREnjHQyZ4C_OXQpkbXjn16EaJSvVE-w"),
-              fit: BoxFit.cover),
+              image: this.friend.photoURL != null
+                  ? NetworkImage(this.friend.photoURL!)
+                  : Svg("assets/images/default-user-avatar.svg",
+                      size: Size(28, 28)) as ImageProvider,
+              fit: this.friend.photoURL != null ? BoxFit.cover : BoxFit.none),
+          color: AppTheme.colors.checkboxActive,
+          border: Border.fromBorderSide(
+            BorderSide(color: AppTheme.colors.checkboxBorderActive),
+          ),
         ),
       ),
       title: Text(

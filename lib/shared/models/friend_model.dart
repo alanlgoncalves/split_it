@@ -4,10 +4,7 @@ class FriendModel {
   final String name;
   final String? photoURL;
 
-  FriendModel({
-    required this.name,
-    this.photoURL,
-  });
+  FriendModel({required this.name, this.photoURL});
 
   FriendModel copyWith({
     String? name,

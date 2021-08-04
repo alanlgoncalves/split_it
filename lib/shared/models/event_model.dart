@@ -11,21 +11,22 @@ import 'base_model.dart';
 class EventModel extends BaseModel {
   final String name;
   final DateTime? createdAt;
-  final double? value;
+  final double value;
   final List<ItemModel> items;
   final List<FriendModel> friends;
 
   int get friendsQuantity => friends.length;
 
-  double get splitValue => value! / friends.length;
+  double get splitValue => itemsValue / friends.length;
 
-  double get itemsValue =>
-      items.map((e) => e.value).reduce((e1, e2) => e1 + e2);
+  double get itemsValue => items.isNotEmpty
+      ? items.map((e) => e.value).reduce((e1, e2) => e1 + e2)
+      : 0;
 
   EventModel({
     this.name = "",
     this.createdAt,
-    this.value,
+    this.value = 0,
     this.items = const [],
     this.friends = const [],
   });

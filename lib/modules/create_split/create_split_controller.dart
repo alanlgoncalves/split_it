@@ -25,7 +25,7 @@ abstract class _CreateSplitControllerBase with Store {
 
   @action
   void nextPage() {
-    if (currentPage < 2) {
+    if (currentPage < 3) {
       currentPage++;
     }
   }
@@ -62,9 +62,10 @@ abstract class _CreateSplitControllerBase with Store {
     try {
       status = "loading";
 
-      final response = await firebaseRepository.create(event);
+      await firebaseRepository.create(event);
 
       status = "sucess";
+      nextPage();
     } catch (e) {
       status = "error";
     }

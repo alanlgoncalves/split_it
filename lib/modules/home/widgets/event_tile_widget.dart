@@ -16,7 +16,7 @@ class EventTileWidget extends StatelessWidget {
       : super(key: key);
 
   IconDollarType get type =>
-      event.value! >= 0 ? IconDollarType.RECEIVE : IconDollarType.SEND;
+      event.value >= 0 ? IconDollarType.RECEIVE : IconDollarType.SEND;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class EventTileWidget extends StatelessWidget {
                       children: [
                         Text(
                           NumberFormat.simpleCurrency()
-                              .format(event.value!.abs()),
+                              .format(event.value.abs()),
                           style: AppTheme.textStyles.eventTileMoney,
                         ),
                         SizedBox(
