@@ -61,7 +61,7 @@ class EventModel extends BaseModel {
   factory EventModel.fromMap(Map<String, dynamic> map) {
     return EventModel(
       name: map['name'],
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
+      createdAt: (map['createdAt'] as Timestamp).toDate(),
       value: map['value'],
       items:
           List<ItemModel>.from(map['items']?.map((x) => ItemModel.fromMap(x))),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:split_it/modules/home/home_controller.dart';
+import 'package:split_it/modules/home/repositories/home_repository_firebase.dart';
 import 'package:split_it/modules/home/widgets/app_bar/app_bar_widget.dart';
 import 'package:split_it/modules/home/widgets/bottom_app_bar/bottom_app_bar_widget.dart';
 import 'package:split_it/modules/home/widgets/event_tile_widget.dart';
@@ -18,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final controller = HomeController();
+  final controller = HomeController(repository: HomeRepositoryFirebase());
 
   @override
   void initState() {
