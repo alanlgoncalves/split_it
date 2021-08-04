@@ -28,6 +28,9 @@ abstract class AppTextStyles {
   TextStyle get stepperTextField;
   TextStyle get personTileTitle;
   TextStyle get personTileTitleSelected;
+  TextStyle get successPageText;
+  TextStyle get successPageValue;
+  TextStyle get successPageButton;
 
   //Group Page
   TextStyle get groupAppBarTitle;
@@ -250,5 +253,26 @@ class AppTextStylesDefault implements AppTextStyles {
         fontSize: 16,
         fontWeight: FontWeight.w500,
         color: AppTheme.colors.stepperNextHighlighted,
+      );
+
+  @override
+  TextStyle get successPageButton => GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: AppTheme.colors.successPageText,
+      );
+
+  @override
+  TextStyle get successPageText => GoogleFonts.inter(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: AppTheme.colors.successPageText,
+      );
+
+  @override
+  TextStyle get successPageValue => GoogleFonts.montserrat(
+        fontSize: 40,
+        fontWeight: FontWeight.w700,
+        color: AppTheme.colors.successPageText,
       );
 }

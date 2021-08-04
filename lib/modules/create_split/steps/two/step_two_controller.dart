@@ -21,10 +21,12 @@ abstract class _StepTwoControllerBase with Store {
   @observable
   String search = "";
 
+  late ReactionDisposer _disposer;
+
   _StepTwoControllerBase({required this.controller}) {
     this._selectedFriends.addAll(controller.event.friends);
 
-    autorun((_) {
+    _disposer = autorun((_) {
       this.controller.onChanged(friends: _selectedFriends);
     });
   }
@@ -61,5 +63,9 @@ abstract class _StepTwoControllerBase with Store {
     final response = await this.repository.get("friends");
 
     _friends = response.map((e) => FriendModel.fromMap(e)).toList();
+  }
+
+  void dispose() {
+    _disposer();
   }
 }

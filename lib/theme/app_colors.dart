@@ -39,6 +39,7 @@ abstract class AppColors {
   Color get iconRemove;
   Color get personTileTitle;
   Color get personTileTitleSelected;
+  Color get successPageText;
 
   //Group Page
   Color get groupBackButton;
@@ -206,4 +207,7 @@ class AppColorsDefault implements AppColors {
 
   @override
   Color get stepperNextHighlighted => Color(0xFF40B28C);
+
+  @override
+  Color get successPageText => Color(0xFFFFFFFF);
 }
