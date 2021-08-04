@@ -99,8 +99,8 @@ class _HomePageState extends State<HomePage> {
                                         event: event,
                                         isLoading: false,
                                         onTap: () {
-                                          Navigator.pushNamed(
-                                              context, "/group");
+                                          Navigator.pushNamed(context, "/group",
+                                              arguments: event);
                                         },
                                       )),
                             ],

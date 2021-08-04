@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:split_it/modules/group/widgets/group_appbar.dart';
 import 'package:split_it/modules/group/widgets/item_tile.dart';
 import 'package:split_it/modules/group/widgets/persons_section.dart';
+import 'package:split_it/shared/models/event_model.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class GroupPage extends StatefulWidget {
@@ -14,9 +16,11 @@ class GroupPage extends StatefulWidget {
 class _GroupPageState extends State<GroupPage> {
   @override
   Widget build(BuildContext context) {
+    EventModel event = ModalRoute.of(context)!.settings.arguments as EventModel;
+
     return Scaffold(
       appBar: GroupAppbarWidget(
-        title: "Churrasco",
+        title: event.name,
         onTapBack: () {
           Navigator.pop(context);
         },
@@ -30,7 +34,9 @@ class _GroupPageState extends State<GroupPage> {
                 height: 8,
                 color: AppTheme.colors.groupSpacesDivider,
               ),
-              PersonSectionWidget(),
+              PersonSectionWidget(
+                event: event,
+              ),
               Container(
                 height: 8,
                 color: AppTheme.colors.groupSpacesDivider,
@@ -62,53 +68,22 @@ class _GroupPageState extends State<GroupPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
-                  children: [
-                    ItemTileWidget(
-                      name: "Picanha",
-                      value: 122,
-                    ),
-                    Container(
-                      height: 1,
-                      color: AppTheme.colors.groupDivider,
-                    ),
-                    ItemTileWidget(
-                      name: "Linguicinha",
-                      value: 17,
-                    ),
-                    Container(
-                      height: 1,
-                      color: AppTheme.colors.groupDivider,
-                    ),
-                    ItemTileWidget(
-                      name: "Carvão",
-                      value: 19,
-                    ),
-                    Container(
-                      height: 1,
-                      color: AppTheme.colors.groupDivider,
-                    ),
-                    ItemTileWidget(
-                      name: "Cerveja",
-                      value: 68,
-                    ),
-                    Container(
-                      height: 1,
-                      color: AppTheme.colors.groupDivider,
-                    ),
-                    ItemTileWidget(
-                      name: "Refrigerante",
-                      value: 12,
-                    ),
-                    Container(
-                      height: 1,
-                      color: AppTheme.colors.groupDivider,
-                    ),
-                    ItemTileWidget(
-                      name: "Pão de alho",
-                      value: 15,
-                    ),
-                  ],
-                ),
+                    children: event.items
+                        .map(
+                          (item) => Column(
+                            children: [
+                              ItemTileWidget(
+                                name: item.name,
+                                value: item.value,
+                              ),
+                              Container(
+                                height: 1,
+                                color: AppTheme.colors.groupDivider,
+                              ),
+                            ],
+                          ),
+                        )
+                        .toList()),
               ),
               Container(
                 color: AppTheme.colors.groupSpacesDivider,
@@ -121,11 +96,15 @@ class _GroupPageState extends State<GroupPage> {
                           Text("Total", style: AppTheme.textStyles.itemValue),
                       trailing: Text.rich(
                         TextSpan(
-                          text: "R\$",
+                          text:
+                              "${NumberFormat.simpleCurrency().format(event.itemsValue).toString().split(" ")[0]} ",
                           style: AppTheme.textStyles.currencySymbol,
                           children: [
                             TextSpan(
-                                text: "122,00",
+                                text: NumberFormat.simpleCurrency()
+                                    .format(event.itemsValue)
+                                    .toString()
+                                    .split(" ")[1],
                                 style: AppTheme.textStyles.itemValue)
                           ],
                         ),

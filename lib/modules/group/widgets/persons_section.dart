@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:split_it/modules/group/widgets/person_tile.dart';
+import 'package:split_it/shared/models/event_model.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class PersonSectionWidget extends StatefulWidget {
-  const PersonSectionWidget({Key? key}) : super(key: key);
+  final EventModel event;
+
+  const PersonSectionWidget({Key? key, required this.event}) : super(key: key);
 
   @override
   _PersonSectionWidgetState createState() => _PersonSectionWidgetState();
@@ -24,14 +27,12 @@ class _PersonSectionWidgetState extends State<PersonSectionWidget> {
               ),
             ],
           ),
-          PersonTileWidget(
-            name: "Você",
-            value: 126,
-          ),
-          PersonTileWidget(
-            name: "João",
-            value: -127.5,
-          ),
+          ...widget.event.friends
+              .map((e) => PersonTileWidget(
+                    name: e.name,
+                    value: 126,
+                  ))
+              .toList(),
         ],
       ),
     );
