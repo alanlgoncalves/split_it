@@ -1,6 +1,9 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:split_it/modules/create_split/create_split_controller.dart';
+import 'package:split_it/modules/create_split/steps/two/get_users_from_firebase_status.dart';
 import 'package:split_it/modules/create_split/steps/two/step_two_controller.dart';
 import 'package:split_it/modules/create_split/widgets/person_tile.dart';
 import 'package:split_it/modules/create_split/widgets/step_input_text.dart';
@@ -17,17 +20,28 @@ class StepTwoPage extends StatefulWidget {
 
 class _StepTwoPageState extends State<StepTwoPage> {
   late StepTwoController controller;
+  late ReactionDisposer _disposer;
 
   @override
   void initState() {
     this.controller = StepTwoController(controller: widget.controller);
     this.controller.getFriends();
 
+    autorun((_) {
+      if (controller.usersStatus == GetUsersFromFirebaseStatus.loading) {
+        BotToast.showLoading();
+      } else {
+        BotToast.closeAllLoading();
+      }
+    });
+
     super.initState();
   }
 
   @override
   void dispose() {
+    _disposer();
+
     controller.dispose();
     super.dispose();
   }
@@ -70,9 +84,11 @@ class _StepTwoPageState extends State<StepTwoPage> {
           }
         }),
         Observer(builder: (_) {
-          if (controller.items.isEmpty) {
-            return Text("Nenhum amigo(a) encontrado");
-          } else {
+          if (controller.usersStatus == GetUsersFromFirebaseStatus.loading) {
+            return Container();
+          } else if (controller.usersStatus ==
+                  GetUsersFromFirebaseStatus.success &&
+              controller.items.isNotEmpty) {
             return Column(
               children: controller.items
                   .map((friend) => PersonTileWidget(
@@ -83,6 +99,12 @@ class _StepTwoPageState extends State<StepTwoPage> {
                       ))
                   .toList(),
             );
+          } else {
+            if (controller.selectedFriends.isEmpty) {
+              return Text("Nenhum amigo(a) encontrado");
+            } else {
+              return Text("Todos seus amigos foram adicionados 🥳");
+            }
           }
         }),
       ],

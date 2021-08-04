@@ -63,6 +63,21 @@ mixin _$StepTwoController on _StepTwoControllerBase, Store {
     });
   }
 
+  final _$usersStatusAtom = Atom(name: '_StepTwoControllerBase.usersStatus');
+
+  @override
+  GetUsersFromFirebaseStatus get usersStatus {
+    _$usersStatusAtom.reportRead();
+    return super.usersStatus;
+  }
+
+  @override
+  set usersStatus(GetUsersFromFirebaseStatus value) {
+    _$usersStatusAtom.reportWrite(value, super.usersStatus, () {
+      super.usersStatus = value;
+    });
+  }
+
   final _$getFriendsAsyncAction =
       AsyncAction('_StepTwoControllerBase.getFriends');
 
@@ -111,6 +126,7 @@ mixin _$StepTwoController on _StepTwoControllerBase, Store {
   String toString() {
     return '''
 search: ${search},
+usersStatus: ${usersStatus},
 items: ${items}
     ''';
   }

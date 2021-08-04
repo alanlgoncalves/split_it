@@ -2,6 +2,8 @@ import 'package:mobx/mobx.dart';
 import 'package:split_it/modules/create_split/create_split_controller.dart';
 import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/shared/repositories/firebase_repository.dart';
+
+import 'get_users_from_firebase_status.dart';
 part 'step_two_controller.g.dart';
 
 class StepTwoController = _StepTwoControllerBase with _$StepTwoController;
@@ -20,6 +22,9 @@ abstract class _StepTwoControllerBase with Store {
 
   @observable
   String search = "";
+
+  @observable
+  GetUsersFromFirebaseStatus usersStatus = GetUsersFromFirebaseStatus.empty;
 
   late ReactionDisposer _disposer;
 
@@ -60,9 +65,17 @@ abstract class _StepTwoControllerBase with Store {
 
   @action
   Future<void> getFriends() async {
-    final response = await this.repository.get("friends");
+    try {
+      usersStatus = GetUsersFromFirebaseStatus.loading;
 
-    _friends = response.map((e) => FriendModel.fromMap(e)).toList();
+      final response = await this.repository.get("friends");
+
+      _friends = response.map((e) => FriendModel.fromMap(e)).toList();
+
+      usersStatus = GetUsersFromFirebaseStatus.success;
+    } catch (e) {
+      usersStatus = GetUsersFromFirebaseStatus.error;
+    }
   }
 
   void dispose() {
