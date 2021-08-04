@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -11,6 +12,7 @@ import 'package:split_it/modules/create_split_success/create_split_success_page.
 import 'package:split_it/shared/repositories/firebase_repository.dart';
 import 'package:split_it/theme/app_theme.dart';
 
+import 'create_split_status.dart';
 import 'steps/one/step_one_page.dart';
 
 class CreateSplitPage extends StatefulWidget {
@@ -41,14 +43,32 @@ class _CreateSplitPageState extends State<CreateSplitPage> {
     ];
 
     _disposer = autorun((_) {
-      if (controller.status == "success") {
+      if (controller.status == CreateSplitStatus.success) {
+        BotToast.closeAllLoading();
+
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) =>
                     CreateSplitSuccessPage(controller: controller)));
-      } else if (controller.status == "error") {
-        // TODO - Tratar erro
+      } else if (controller.status == CreateSplitStatus.error) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Icon(Icons.warning),
+            content: Text(
+              "Não foi possível cadastrar esse evento, tente novamente.",
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      } else if (controller.status == CreateSplitStatus.loading) {
+        BotToast.showLoading();
       }
     });
 

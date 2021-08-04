@@ -4,6 +4,8 @@ import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/shared/models/item_model.dart';
 import 'package:split_it/shared/repositories/firebase_repository.dart';
 
+import 'create_split_status.dart';
+
 part 'create_split_controller.g.dart';
 
 class CreateSplitController = _CreateSplitControllerBase
@@ -19,7 +21,7 @@ abstract class _CreateSplitControllerBase with Store {
   EventModel event = EventModel();
 
   @observable
-  String status = 'empty';
+  CreateSplitStatus status = CreateSplitStatus.empty;
 
   _CreateSplitControllerBase({required this.firebaseRepository});
 
@@ -60,13 +62,13 @@ abstract class _CreateSplitControllerBase with Store {
   @action
   Future<void> saveEvent() async {
     try {
-      status = "loading";
+      status = CreateSplitStatus.loading;
 
       await firebaseRepository.create(event);
 
-      status = "success";
+      status = CreateSplitStatus.success;
     } catch (e) {
-      status = "error";
+      status = CreateSplitStatus.error;
     }
   }
 }

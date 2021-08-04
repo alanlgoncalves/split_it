@@ -95,7 +95,9 @@ class CreateSplitSuccessPage extends StatelessWidget {
       ),
       //gradient(135deg, #40B38C 0%, #45CC93 100%);
       bottomNavigationBar: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.pop(context);
+        },
         child: Ink(
           decoration: BoxDecoration(
             gradient: LinearGradient(
