@@ -37,9 +37,14 @@ class BottomStepperBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 61,
       child: Column(
         children: [
+          Container(
+            width: double.maxFinite,
+            height: 0.3,
+            color: AppTheme.colors.divider,
+          ),
           Row(
             children: [
               Observer(builder: (_) {
@@ -60,6 +65,9 @@ class BottomStepperBarWidget extends StatelessWidget {
                       controller.currentPage == 2 ? "Finalizar" : "Continuar",
                   onTap:
                       controller.enableNavigateButton ? onTapNext : showMessage,
+                  hightlight: controller.isLastPage &&
+                      controller.event.items.isNotEmpty,
+                  enabled: controller.enableNavigateButton,
                 );
               }),
             ],

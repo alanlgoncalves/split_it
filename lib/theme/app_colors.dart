@@ -143,7 +143,7 @@ class AppColorsDefault implements AppColors {
   Color get inputBorder => Color(0xFF455250);
 
   @override
-  Color get stepperNextButtonDisabled => Color(0xFF666666);
+  Color get stepperNextButtonDisabled => Color(0xFF666666).withOpacity(0.2);
 
   @override
   Color get groupActionButton => Color(0xFF455250);

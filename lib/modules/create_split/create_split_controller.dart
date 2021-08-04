@@ -17,6 +17,8 @@ abstract class _CreateSplitControllerBase with Store {
   @observable
   int currentPage = 0;
 
+  bool get isLastPage => currentPage == 2;
+
   @observable
   EventModel event = EventModel();
 
