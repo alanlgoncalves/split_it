@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:split_it/modules/create_split/create_split_controller.dart';
@@ -15,6 +16,21 @@ class BottomStepperBarWidget extends StatelessWidget {
       controller.saveEvent();
     } else {
       controller.nextPage();
+    }
+  }
+
+  void showMessage() {
+    switch (controller.currentPage) {
+      case 0:
+        BotToast.showText(text: "Digite o nome do evento");
+        break;
+      case 1:
+        BotToast.showText(text: "Escolha ao menos uma pessoa");
+        break;
+      case 2:
+        BotToast.showText(text: "Adicione ao menos um item");
+        break;
+      default:
     }
   }
 
@@ -42,8 +58,8 @@ class BottomStepperBarWidget extends StatelessWidget {
                 return StepperNextButtonWidget(
                   label:
                       controller.currentPage == 2 ? "Finalizar" : "Continuar",
-                  enabled: controller.enableNavigateButton,
-                  onTap: controller.enableNavigateButton ? onTapNext : null,
+                  onTap:
+                      controller.enableNavigateButton ? onTapNext : showMessage,
                 );
               }),
             ],
