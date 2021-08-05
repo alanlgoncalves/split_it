@@ -43,8 +43,10 @@ class _HomePageState extends State<HomePage> {
             elevation: 0,
             flexibleSpace: AppBarWidget(
               user: user,
-              onTapAddButton: () {
-                Navigator.pushNamed(context, Routes.create_split.route);
+              onTapAddButton: () async {
+                await Navigator.pushNamed(context, Routes.create_split.route);
+
+                controller.getEvents();
               },
             ),
           ),
