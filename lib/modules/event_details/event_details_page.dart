@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:split_it/modules/group/widgets/group_appbar.dart';
-import 'package:split_it/modules/group/widgets/item_tile.dart';
-import 'package:split_it/modules/group/widgets/persons_section.dart';
+import 'package:split_it/modules/event_details/widgets/event_details_appbar.dart';
+import 'package:split_it/modules/event_details/widgets/item_tile.dart';
+import 'package:split_it/modules/event_details/widgets/persons_section.dart';
 import 'package:split_it/shared/models/event_model.dart';
 import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
-class GroupPage extends StatefulWidget {
-  const GroupPage({Key? key}) : super(key: key);
+class EventDetailsPage extends StatefulWidget {
+  const EventDetailsPage({Key? key}) : super(key: key);
 
   @override
-  _GroupPageState createState() => _GroupPageState();
+  _EventDetailsPageState createState() => _EventDetailsPageState();
 }
 
-class _GroupPageState extends State<GroupPage> {
+class _EventDetailsPageState extends State<EventDetailsPage> {
   @override
   Widget build(BuildContext context) {
     EventModel event = ModalRoute.of(context)!.settings.arguments as EventModel;
 
     return Scaffold(
-      appBar: GroupAppbarWidget(
+      appBar: EventDetailsAppbarWidget(
         title: event.name,
         onTapBack: () {
           Navigator.pop(context);
@@ -61,10 +61,6 @@ class _GroupPageState extends State<GroupPage> {
                   ],
                 ),
               ),
-              Container(
-                height: 1,
-                color: AppTheme.colors.groupDivider,
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
@@ -84,6 +80,9 @@ class _GroupPageState extends State<GroupPage> {
                           ),
                         )
                         .toList()),
+              ),
+              SizedBox(
+                height: 20,
               ),
               Container(
                 color: AppTheme.colors.groupSpacesDivider,
@@ -123,7 +122,7 @@ class _GroupPageState extends State<GroupPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "Faltam R\$126,00",
+                          "Faltam ${event.remainingValue.simpleCurrency()}",
                           style: AppTheme.textStyles.remainingValue,
                         ),
                       ],

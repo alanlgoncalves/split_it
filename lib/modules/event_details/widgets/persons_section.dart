@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:split_it/modules/group/widgets/person_tile.dart';
+import 'package:split_it/modules/event_details/widgets/person_tile.dart';
 import 'package:split_it/shared/models/event_model.dart';
 import 'package:split_it/theme/app_theme.dart';
 
@@ -28,9 +28,10 @@ class _PersonSectionWidgetState extends State<PersonSectionWidget> {
             ],
           ),
           ...widget.event.friends
-              .map((e) => PersonTileWidget(
-                    name: e.name,
-                    value: 126,
+              .map((friend) => PersonTileWidget(
+                    friend: friend,
+                    value: widget.event.splitValue,
+                    onChanged: (value) {},
                   ))
               .toList(),
         ],

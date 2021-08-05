@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:split_it/theme/app_theme.dart';
 
-class GroupAppbarWidget extends PreferredSize {
+class EventDetailsAppbarWidget extends PreferredSize {
   final String title;
   final VoidCallback onTapBack;
   final VoidCallback onTapAction;
 
-  GroupAppbarWidget(
+  EventDetailsAppbarWidget(
       {required this.title, required this.onTapBack, required this.onTapAction})
       : super(
           child: SafeArea(

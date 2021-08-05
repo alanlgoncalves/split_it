@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:split_it/shared/utils/routes.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class SplashPage extends StatefulWidget {
@@ -16,10 +17,10 @@ class _SplashPageState extends State<SplashPage> {
       initializeDateFormatting();
       await Firebase.initializeApp();
       await Future.delayed(Duration(seconds: 2));
-      Navigator.pushReplacementNamed(context, "/login");
+      Navigator.pushReplacementNamed(context, Routes.login.route);
     } catch (e) {
       print(e);
-      Navigator.pushReplacementNamed(context, "/error");
+      Navigator.pushReplacementNamed(context, Routes.error.route);
     }
   }
 

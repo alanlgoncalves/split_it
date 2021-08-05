@@ -7,6 +7,7 @@ import 'package:split_it/modules/home/widgets/bottom_app_bar/bottom_app_bar_widg
 import 'package:split_it/modules/home/widgets/event_tile_widget.dart';
 import 'package:split_it/modules/login/models/user_model.dart';
 import 'package:split_it/shared/models/event_model.dart';
+import 'package:split_it/shared/utils/routes.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 import 'home_state.dart';
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
             flexibleSpace: AppBarWidget(
               user: user,
               onTapAddButton: () {
-                Navigator.pushNamed(context, "/create_split");
+                Navigator.pushNamed(context, Routes.create_split.route);
               },
             ),
           ),
@@ -99,7 +100,8 @@ class _HomePageState extends State<HomePage> {
                                         event: event,
                                         isLoading: false,
                                         onTap: () {
-                                          Navigator.pushNamed(context, "/group",
+                                          Navigator.pushNamed(context,
+                                              Routes.event_details.route,
                                               arguments: event);
                                         },
                                       )),

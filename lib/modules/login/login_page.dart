@@ -5,6 +5,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:split_it/modules/login/login_controller.dart';
 import 'package:split_it/modules/login/login_service.dart';
 import 'package:split_it/modules/login/widgets/social_button.dart';
+import 'package:split_it/shared/utils/routes.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 import 'login_state.dart';
@@ -26,7 +27,8 @@ class _LoginPageState extends State<LoginPage> {
     autorun((_) {
       if (controller.state is LoginStateSuccess) {
         final user = (controller.state as LoginStateSuccess).user;
-        Navigator.pushReplacementNamed(context, "/home", arguments: user);
+        Navigator.pushReplacementNamed(context, Routes.home.route,
+            arguments: user);
       }
     });
 

@@ -12,12 +12,14 @@ class EventModel extends BaseModel {
   final String name;
   final DateTime? createdAt;
   final double value;
+  final double paidValue;
   final List<ItemModel> items;
   final List<FriendModel> friends;
 
   int get friendsQuantity => friends.length;
 
   double get splitValue => itemsValue / friends.length;
+  double get remainingValue => value - paidValue;
 
   double get itemsValue => items.isNotEmpty
       ? items.map((e) => e.value).reduce((e1, e2) => e1 + e2)
@@ -27,6 +29,7 @@ class EventModel extends BaseModel {
     this.name = "",
     this.createdAt,
     this.value = 0,
+    this.paidValue = 0,
     this.items = const [],
     this.friends = const [],
   });
@@ -35,6 +38,7 @@ class EventModel extends BaseModel {
     String? name,
     DateTime? createdAt,
     double? value,
+    double? paidValue,
     List<ItemModel>? items,
     List<FriendModel>? friends,
   }) {
@@ -42,6 +46,7 @@ class EventModel extends BaseModel {
       name: name ?? this.name,
       createdAt: createdAt ?? this.createdAt,
       value: itemsValue,
+      paidValue: paidValue ?? this.paidValue,
       items: items ?? this.items,
       friends: friends ?? this.friends,
     );
@@ -52,6 +57,7 @@ class EventModel extends BaseModel {
     return {
       'name': name,
       'createdAt': FieldValue.serverTimestamp(),
+      'paidValue': paidValue,
       'value': itemsValue,
       'items': items.map((x) => x.toMap()).toList(),
       'friends': friends.map((x) => x.toMap()).toList(),
@@ -63,6 +69,7 @@ class EventModel extends BaseModel {
       name: map['name'],
       createdAt: (map['createdAt'] as Timestamp).toDate(),
       value: map['value'],
+      paidValue: map['paidValue'] ?? 0,
       items:
           List<ItemModel>.from(map['items']?.map((x) => ItemModel.fromMap(x))),
       friends: List<FriendModel>.from(
@@ -77,7 +84,7 @@ class EventModel extends BaseModel {
 
   @override
   String toString() {
-    return 'EventModel(name: $name, createdAt: $createdAt, value: $value, items: $items, friends: $friends)';
+    return 'EventModel(name: $name, createdAt: $createdAt, value: $value, paidValue: $paidValue, items: $items, friends: $friends)';
   }
 
   @override
@@ -88,6 +95,7 @@ class EventModel extends BaseModel {
         other.name == name &&
         other.createdAt == createdAt &&
         other.value == value &&
+        other.paidValue == paidValue &&
         listEquals(other.items, items) &&
         listEquals(other.friends, friends);
   }
@@ -97,6 +105,7 @@ class EventModel extends BaseModel {
     return name.hashCode ^
         createdAt.hashCode ^
         value.hashCode ^
+        paidValue.hashCode ^
         items.hashCode ^
         friends.hashCode;
   }
