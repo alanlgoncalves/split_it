@@ -9,6 +9,7 @@ import 'package:split_it/shared/models/item_model.dart';
 import 'base_model.dart';
 
 class EventModel extends BaseModel {
+  final String id;
   final String name;
   final DateTime? createdAt;
   final double value;
@@ -26,6 +27,7 @@ class EventModel extends BaseModel {
       : 0;
 
   EventModel({
+    this.id = "",
     this.name = "",
     this.createdAt,
     this.value = 0,
@@ -66,6 +68,7 @@ class EventModel extends BaseModel {
 
   factory EventModel.fromMap(Map<String, dynamic> map) {
     return EventModel(
+      id: map['id'],
       name: map['name'],
       createdAt: (map['createdAt'] as Timestamp).toDate(),
       value: map['value'],
@@ -84,7 +87,7 @@ class EventModel extends BaseModel {
 
   @override
   String toString() {
-    return 'EventModel(name: $name, createdAt: $createdAt, value: $value, paidValue: $paidValue, items: $items, friends: $friends)';
+    return 'EventModel(id: $id, name: $name, createdAt: $createdAt, value: $value, paidValue: $paidValue, items: $items, friends: $friends)';
   }
 
   @override
@@ -92,6 +95,7 @@ class EventModel extends BaseModel {
     if (identical(this, other)) return true;
 
     return other is EventModel &&
+        other.id == id &&
         other.name == name &&
         other.createdAt == createdAt &&
         other.value == value &&
@@ -102,7 +106,8 @@ class EventModel extends BaseModel {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return id.hashCode ^
+        name.hashCode ^
         createdAt.hashCode ^
         value.hashCode ^
         paidValue.hashCode ^

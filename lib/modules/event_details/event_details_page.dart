@@ -1,8 +1,13 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
+import 'package:split_it/modules/event_details/event_details_controller.dart';
+import 'package:split_it/modules/event_details/event_details_status.dart';
 import 'package:split_it/modules/event_details/widgets/event_details_appbar.dart';
 import 'package:split_it/modules/event_details/widgets/item_tile.dart';
 import 'package:split_it/modules/event_details/widgets/persons_section.dart';
 import 'package:split_it/shared/models/event_model.dart';
+import 'package:split_it/shared/repositories/firebase_repository.dart';
 import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
@@ -14,6 +19,51 @@ class EventDetailsPage extends StatefulWidget {
 }
 
 class _EventDetailsPageState extends State<EventDetailsPage> {
+  late ReactionDisposer _disposer;
+
+  final controller =
+      EventDetailsController(firebaseRepository: FirebaseRepository());
+
+  @override
+  void initState() {
+    _disposer = autorun((_) {
+      if (controller.status == EventDetailsStatus.success) {
+        BotToast.closeAllLoading();
+
+        BotToast.showText(text: "Deletado com sucesso!");
+
+        Navigator.pop(context);
+      } else if (controller.status == EventDetailsStatus.error) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Icon(Icons.warning),
+            content: Text(
+              "Não foi possível deletar o evento, tente novamente mais tarde.",
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      } else if (controller.status == EventDetailsStatus.loading) {
+        BotToast.showLoading();
+      }
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _disposer();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     EventModel event = ModalRoute.of(context)!.settings.arguments as EventModel;
@@ -24,7 +74,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         onTapBack: () {
           Navigator.pop(context);
         },
-        onTapAction: () {},
+        onTapAction: () {
+          controller.delete(event.id);
+        },
       ),
       body: SafeArea(
         child: SingleChildScrollView(

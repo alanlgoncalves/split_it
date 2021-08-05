@@ -99,10 +99,12 @@ class _HomePageState extends State<HomePage> {
                                   .map((event) => EventTileWidget(
                                         event: event,
                                         isLoading: false,
-                                        onTap: () {
-                                          Navigator.pushNamed(context,
+                                        onTap: () async {
+                                          await Navigator.pushNamed(context,
                                               Routes.event_details.route,
                                               arguments: event);
+
+                                          controller.getEvents();
                                         },
                                       )),
                             ],
