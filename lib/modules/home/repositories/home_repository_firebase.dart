@@ -19,6 +19,8 @@ class HomeRepositoryFirebase extends HomeRepository {
       final response = await client.get("events");
       final events = response.map((e) => EventModel.fromMap(e)).toList();
 
+      events.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+
       return events;
     } catch (e) {
       return [];
