@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:split_it/modules/home/widgets/icon_dolar_widget.dart';
+import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 import 'loading_widget.dart';
@@ -56,7 +56,7 @@ class InfoCardWidget extends StatelessWidget {
                 ),
               ] else
                 Text(
-                  NumberFormat.simpleCurrency().format(value.abs()),
+                  value.abs().simpleCurrency(),
                   style: textStyle,
                 ),
             ],

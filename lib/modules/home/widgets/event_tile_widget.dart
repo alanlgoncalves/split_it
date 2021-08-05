@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:split_it/modules/home/widgets/icon_dolar_widget.dart';
 import 'package:split_it/shared/models/event_model.dart';
+import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 import 'loading_widget.dart';
@@ -83,8 +84,7 @@ class EventTileWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          NumberFormat.simpleCurrency()
-                              .format(event.value.abs()),
+                          event.value.abs().simpleCurrency(),
                           style: AppTheme.textStyles.eventTileMoney,
                         ),
                         SizedBox(

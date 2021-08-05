@@ -1,7 +1,9 @@
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:split_it/modules/create_split/widgets/step_input_text.dart';
+import 'package:split_it/shared/utils/money_formatter.dart';
+
+const double zero = 0.0;
 
 class StepItemInputTextWidget extends StatefulWidget {
   final int number;
@@ -31,8 +33,8 @@ class StepItemInputTextWidget extends StatefulWidget {
 class _StepItemInputTextWidgetState extends State<StepItemInputTextWidget> {
   late MoneyMaskedTextController moneyController = MoneyMaskedTextController(
     initialValue: widget.initialValue,
-    leftSymbol: NumberFormat.simpleCurrency(locale: "pt_BR").currencySymbol,
-    decimalSeparator: NumberFormat.simpleCurrency().symbols.DECIMAL_SEP,
+    leftSymbol: zero.currencySymbol(),
+    decimalSeparator: zero.currencyDecimalSeparator(),
   );
 
   @override
@@ -56,7 +58,7 @@ class _StepItemInputTextWidgetState extends State<StepItemInputTextWidget> {
           ),
           Expanded(
             child: StepInputTextWidget(
-              hintText: NumberFormat.simpleCurrency().format(0),
+              hintText: zero.simpleCurrency(),
               textAlign: TextAlign.start,
               padding: EdgeInsets.zero,
               textInputType: TextInputType.number,

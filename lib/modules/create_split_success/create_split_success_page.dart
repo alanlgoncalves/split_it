@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart' as svgProvider;
-import 'package:intl/intl.dart';
 import 'package:split_it/modules/create_split/create_split_controller.dart';
+import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class CreateSplitSuccessPage extends StatelessWidget {
@@ -49,8 +49,7 @@ class CreateSplitSuccessPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: Text(
-                    NumberFormat.simpleCurrency(locale: "pt_BR")
-                        .format(controller.event.splitValue),
+                    controller.event.splitValue.simpleCurrency(),
                     style: AppTheme.textStyles.successPageValue,
                   ),
                 ),

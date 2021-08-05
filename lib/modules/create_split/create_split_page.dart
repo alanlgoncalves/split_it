@@ -84,21 +84,31 @@ class _CreateSplitPageState extends State<CreateSplitPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppTheme.colors.backgroundPrimary,
-      appBar: CreateSplitAppbarWidget(
-        context: context,
-        controller: controller,
-        size: pages.length,
-      ),
-      body: Observer(
-        builder: (_) {
-          return pages[controller.currentPage];
-        },
-      ),
-      bottomNavigationBar: SafeArea(
-        child: BottomStepperBarWidget(
+    return WillPopScope(
+      onWillPop: () async {
+        if (controller.currentPage == 0) {
+          return true;
+        } else {
+          controller.backPage();
+          return false;
+        }
+      },
+      child: Scaffold(
+        backgroundColor: AppTheme.colors.backgroundPrimary,
+        appBar: CreateSplitAppbarWidget(
+          context: context,
           controller: controller,
+          size: pages.length,
+        ),
+        body: Observer(
+          builder: (_) {
+            return pages[controller.currentPage];
+          },
+        ),
+        bottomNavigationBar: SafeArea(
+          child: BottomStepperBarWidget(
+            controller: controller,
+          ),
         ),
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class ItemTileWidget extends StatelessWidget {
@@ -8,12 +8,6 @@ class ItemTileWidget extends StatelessWidget {
 
   const ItemTileWidget({Key? key, required this.name, required this.value})
       : super(key: key);
-
-  String get currency =>
-      NumberFormat.simpleCurrency().format(this.value).toString().split(" ")[0];
-
-  String get formattedValue =>
-      NumberFormat.simpleCurrency().format(this.value).toString().split(" ")[1];
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +19,12 @@ class ItemTileWidget extends StatelessWidget {
       ),
       trailing: Text.rich(
         TextSpan(
-          text: "$currency ",
+          text: "${value.currencySymbol()} ",
           style: AppTheme.textStyles.currencySymbol,
           children: [
-            TextSpan(text: formattedValue, style: AppTheme.textStyles.itemValue)
+            TextSpan(
+                text: value.simpleCurrencyWithoutSimbol(),
+                style: AppTheme.textStyles.itemValue)
           ],
         ),
       ),

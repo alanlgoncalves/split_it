@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class PersonTileWidget extends StatefulWidget {
@@ -52,7 +52,7 @@ class _PersonTileWidgetState extends State<PersonTileWidget> {
           style: AppTheme.textStyles.personName,
         ),
         subtitle: Text(
-          NumberFormat.simpleCurrency().format(widget.value.abs()),
+          widget.value.abs().simpleCurrency(),
           style: valueTextStyle,
         ),
         trailing: Container(

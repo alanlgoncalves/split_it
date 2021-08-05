@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:split_it/modules/group/widgets/group_appbar.dart';
 import 'package:split_it/modules/group/widgets/item_tile.dart';
 import 'package:split_it/modules/group/widgets/persons_section.dart';
 import 'package:split_it/shared/models/event_model.dart';
+import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class GroupPage extends StatefulWidget {
@@ -96,15 +96,12 @@ class _GroupPageState extends State<GroupPage> {
                           Text("Total", style: AppTheme.textStyles.itemValue),
                       trailing: Text.rich(
                         TextSpan(
-                          text:
-                              "${NumberFormat.simpleCurrency().format(event.itemsValue).toString().split(" ")[0]} ",
+                          text: "${event.itemsValue.currencySymbol()} ",
                           style: AppTheme.textStyles.currencySymbol,
                           children: [
                             TextSpan(
-                                text: NumberFormat.simpleCurrency()
-                                    .format(event.itemsValue)
-                                    .toString()
-                                    .split(" ")[1],
+                                text: event.itemsValue
+                                    .simpleCurrencyWithoutSimbol(),
                                 style: AppTheme.textStyles.itemValue)
                           ],
                         ),
