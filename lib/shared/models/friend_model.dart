@@ -3,31 +3,30 @@ import 'dart:convert';
 class FriendModel {
   final String name;
   final String? photoURL;
+  final bool isPaid;
 
-  FriendModel({required this.name, this.photoURL});
+  FriendModel({required this.name, this.photoURL, this.isPaid = false});
 
   FriendModel copyWith({
     String? name,
     String? photoURL,
+    bool? isPaid,
   }) {
     return FriendModel(
-      name: name ?? this.name,
-      photoURL: photoURL ?? this.photoURL,
-    );
+        name: name ?? this.name,
+        photoURL: photoURL ?? this.photoURL,
+        isPaid: isPaid ?? this.isPaid);
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'photoURL': photoURL,
-    };
+    return {'name': name, 'photoURL': photoURL, 'isPaid': isPaid};
   }
 
   factory FriendModel.fromMap(Map<String, dynamic> map) {
     return FriendModel(
-      name: map['name'],
-      photoURL: map['photoURL'],
-    );
+        name: map['name'],
+        photoURL: map['photoURL'],
+        isPaid: map['isPaid'] ?? false);
   }
 
   String toJson() => json.encode(toMap());

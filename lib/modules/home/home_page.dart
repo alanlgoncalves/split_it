@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:split_it/modules/event_details/event_details_page.dart';
 import 'package:split_it/modules/home/home_controller.dart';
 import 'package:split_it/modules/home/repositories/home_repository_firebase.dart';
 import 'package:split_it/modules/home/widgets/app_bar/app_bar_widget.dart';
@@ -102,9 +103,13 @@ class _HomePageState extends State<HomePage> {
                                         event: event,
                                         isLoading: false,
                                         onTap: () async {
-                                          await Navigator.pushNamed(context,
-                                              Routes.event_details.route,
-                                              arguments: event);
+                                          await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EventDetailsPage(
+                                                        event: event,
+                                                      )));
 
                                           controller.getEvents();
                                         },

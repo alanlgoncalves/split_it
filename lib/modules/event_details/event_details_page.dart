@@ -1,6 +1,8 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+
 import 'package:split_it/modules/event_details/event_details_controller.dart';
 import 'package:split_it/modules/event_details/event_details_status.dart';
 import 'package:split_it/modules/event_details/widgets/event_details_appbar.dart';
@@ -12,7 +14,12 @@ import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
 
 class EventDetailsPage extends StatefulWidget {
-  const EventDetailsPage({Key? key}) : super(key: key);
+  final EventModel event;
+
+  const EventDetailsPage({
+    Key? key,
+    required this.event,
+  }) : super(key: key);
 
   @override
   _EventDetailsPageState createState() => _EventDetailsPageState();
@@ -21,11 +28,13 @@ class EventDetailsPage extends StatefulWidget {
 class _EventDetailsPageState extends State<EventDetailsPage> {
   late ReactionDisposer _disposer;
 
-  final controller =
-      EventDetailsController(firebaseRepository: FirebaseRepository());
+  late EventDetailsController controller;
 
   @override
   void initState() {
+    this.controller = EventDetailsController(
+        firebaseRepository: FirebaseRepository(), event: widget.event);
+
     _disposer = autorun((_) {
       if (controller.status == EventDetailsStatus.success) {
         BotToast.closeAllLoading();
@@ -66,16 +75,14 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    EventModel event = ModalRoute.of(context)!.settings.arguments as EventModel;
-
     return Scaffold(
       appBar: EventDetailsAppbarWidget(
-        title: event.name,
+        title: widget.event.name,
         onTapBack: () {
           Navigator.pop(context);
         },
         onTapAction: () {
-          controller.delete(event.id);
+          controller.delete(widget.event.id);
         },
       ),
       body: SafeArea(
@@ -86,9 +93,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                 height: 8,
                 color: AppTheme.colors.groupSpacesDivider,
               ),
-              PersonSectionWidget(
-                event: event,
-              ),
+              PersonSectionWidget(controller: controller),
               Container(
                 height: 8,
                 color: AppTheme.colors.groupSpacesDivider,
@@ -116,7 +121,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
-                    children: event.items
+                    children: widget.event.items
                         .map(
                           (item) => Column(
                             children: [
@@ -147,11 +152,11 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                           Text("Total", style: AppTheme.textStyles.itemValue),
                       trailing: Text.rich(
                         TextSpan(
-                          text: "${event.itemsValue.currencySymbol()} ",
+                          text: "${widget.event.itemsValue.currencySymbol()} ",
                           style: AppTheme.textStyles.currencySymbol,
                           children: [
                             TextSpan(
-                                text: event.itemsValue
+                                text: widget.event.itemsValue
                                     .simpleCurrencyWithoutSimbol(),
                                 style: AppTheme.textStyles.itemValue)
                           ],
@@ -173,10 +178,16 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          "Faltam ${event.remainingValue.simpleCurrency()}",
-                          style: AppTheme.textStyles.remainingValue,
-                        ),
+                        Observer(builder: (_) {
+                          if (controller.event.remainingValue > 0) {
+                            return Text(
+                              "Faltam ${controller.event.remainingValue.simpleCurrency()}",
+                              style: AppTheme.textStyles.remainingValue,
+                            );
+                          } else {
+                            return Container();
+                          }
+                        })
                       ],
                     ),
                   ],

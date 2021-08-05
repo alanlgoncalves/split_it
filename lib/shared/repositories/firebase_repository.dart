@@ -23,7 +23,19 @@ class FirebaseRepository {
     return response.docs.map((e) => e.data()).toList();
   }
 
-  update() {}
+  Future<bool> update({required String id, required BaseModel model}) async {
+    try {
+      await this
+          .firestore
+          .collection(model.collection)
+          .doc(id)
+          .update(model.toMap());
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
   Future<List<Map<String, dynamic>>> get(String collection) async {
     final response = await this.firestore.collection(collection).get();

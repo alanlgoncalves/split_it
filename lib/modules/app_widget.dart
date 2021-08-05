@@ -2,7 +2,6 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:split_it/modules/create_split/create_split_page.dart';
 import 'package:split_it/modules/error/error_page.dart';
-import 'package:split_it/modules/event_details/event_details_page.dart';
 import 'package:split_it/modules/home/home_page.dart';
 import 'package:split_it/modules/login/login_page.dart';
 import 'package:split_it/modules/splash/splash_page.dart';
@@ -23,7 +22,6 @@ class AppWidget extends StatelessWidget {
         Routes.error.route: (context) => ErrorPage(),
         Routes.home.route: (context) => HomePage(),
         Routes.create_split.route: (context) => CreateSplitPage(),
-        Routes.event_details.route: (context) => EventDetailsPage()
       },
     );
   }

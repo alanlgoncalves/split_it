@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:split_it/modules/event_details/widgets/check_rounded/check_rounded_button.dart';
+import 'package:split_it/shared/models/event_model.dart';
 import 'package:split_it/shared/models/friend_model.dart';
 import 'package:split_it/shared/utils/money_formatter.dart';
 import 'package:split_it/theme/app_theme.dart';
@@ -7,26 +9,18 @@ import 'package:split_it/theme/app_theme.dart';
 class PersonTileWidget extends StatelessWidget {
   final FriendModel friend;
   final double value;
-  final bool isChecked;
-  final Function(bool? value) onChanged;
+  final EventModel event;
+  final Function(FriendModel friend) onChanged;
 
-  PersonTileWidget(
-      {Key? key,
-      required this.friend,
-      required this.value,
-      required this.onChanged,
-      this.isChecked = false})
-      : super(key: key);
+  PersonTileWidget({
+    Key? key,
+    required this.friend,
+    required this.value,
+    required this.event,
+    required this.onChanged,
+  }) : super(key: key);
 
-  Color get checkboxColor => isChecked
-      ? AppTheme.colors.checkboxActive
-      : AppTheme.colors.checkboxInactive;
-
-  Color get checkboxBorderColor => isChecked
-      ? AppTheme.colors.checkboxBorderActive
-      : AppTheme.colors.checkboxBorderInactive;
-
-  TextStyle get valueTextStyle => isChecked
+  TextStyle get valueTextStyle => friend.isPaid
       ? AppTheme.textStyles.personValuePositive
       : AppTheme.textStyles.personValueNegative;
 
@@ -61,24 +55,10 @@ class PersonTileWidget extends StatelessWidget {
         value.abs().simpleCurrency(),
         style: valueTextStyle,
       ),
-      trailing: Container(
-        height: 40,
-        width: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: checkboxColor,
-          border: Border.fromBorderSide(
-            BorderSide(
-              width: 1,
-              color: checkboxBorderColor,
-            ),
-          ),
-        ),
-        child: Checkbox(
-          activeColor: Color(0xFF40B38C),
-          onChanged: onChanged,
-          value: isChecked,
-        ),
+      trailing: CheckRoundedButtonWidget(
+        event: event,
+        friend: friend,
+        onChanged: onChanged,
       ),
     );
   }

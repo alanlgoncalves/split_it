@@ -20,7 +20,9 @@ class EventModel extends BaseModel {
   int get friendsQuantity => friends.length;
 
   double get splitValue => itemsValue / friends.length;
-  double get remainingValue => value - paidValue;
+  double get remainingValue =>
+      value -
+      friends.where((friend) => friend.isPaid).toList().length * splitValue;
 
   double get itemsValue => items.isNotEmpty
       ? items.map((e) => e.value).reduce((e1, e2) => e1 + e2)

@@ -1,4 +1,4 @@
-enum Routes { splash, login, error, home, create_split, event_details }
+enum Routes { splash, login, error, home, create_split }
 
 extension RoutesExtension on Routes {
   String get route {
