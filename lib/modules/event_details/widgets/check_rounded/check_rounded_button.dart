@@ -26,7 +26,6 @@ class CheckRoundedButtonWidget extends StatefulWidget {
 
 class _CheckRoundedButtonWidgetState extends State<CheckRoundedButtonWidget> {
   late CheckRoundedController controller;
-  late ReactionDisposer _disposer;
 
   Color get checkboxColor => controller.status == CheckRoundedStatus.success
       ? AppTheme.colors.checkboxActive
@@ -46,21 +45,7 @@ class _CheckRoundedButtonWidgetState extends State<CheckRoundedButtonWidget> {
             ? CheckRoundedStatus.success
             : CheckRoundedStatus.empty);
 
-    _disposer = autorun((_) {
-      if (controller.status == CheckRoundedStatus.success) {
-        widget.onChanged(widget.friend.copyWith(isPaid: true));
-      } else if (controller.status == CheckRoundedStatus.empty) {
-        widget.onChanged(widget.friend.copyWith(isPaid: false));
-      }
-    });
-
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _disposer();
-    super.dispose();
   }
 
   @override
@@ -81,8 +66,14 @@ class _CheckRoundedButtonWidgetState extends State<CheckRoundedButtonWidget> {
         ),
         child: Checkbox(
           activeColor: Color(0xFF40B38C),
-          onChanged: (value) {
-            controller.update(friend: widget.friend);
+          onChanged: (value) async {
+            await controller.update(friend: widget.friend);
+
+            if (controller.status == CheckRoundedStatus.success) {
+              widget.onChanged(widget.friend.copyWith(isPaid: true));
+            } else if (controller.status == CheckRoundedStatus.empty) {
+              widget.onChanged(widget.friend.copyWith(isPaid: false));
+            }
           },
           value: controller.status == CheckRoundedStatus.success ? true : false,
         ),

@@ -32,7 +32,7 @@ abstract class _EventDetailsControllerBase with Store {
     final friends = event.friends;
     friends[index] = friend;
 
-    event = event.copyWith(friends: friends);
+    this.event = event.copyWith(friends: friends);
   }
 
   Future<void> delete(String id) async {

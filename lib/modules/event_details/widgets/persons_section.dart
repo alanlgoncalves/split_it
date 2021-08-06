@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:split_it/modules/event_details/event_details_controller.dart';
 import 'package:split_it/modules/event_details/widgets/person_tile.dart';
-
 import 'package:split_it/theme/app_theme.dart';
 
 class PersonSectionWidget extends StatefulWidget {
@@ -29,20 +29,22 @@ class _PersonSectionWidgetState extends State<PersonSectionWidget> {
               ),
             ],
           ),
-          ...widget.controller.event.friends
-              .map(
-                (friend) => PersonTileWidget(
-                  friend: friend,
-                  event: widget.controller.event,
-                  value: widget.controller.event.splitValue,
-                  onChanged: (friend) {
-                    widget.controller.updateFriend(friend);
-
-                    setState(() {});
-                  },
-                ),
-              )
-              .toList(),
+          Observer(
+            builder: (_) => Column(
+              children: widget.controller.event.friends
+                  .map(
+                    (friend) => PersonTileWidget(
+                      friend: friend,
+                      event: widget.controller.event,
+                      value: widget.controller.event.splitValue,
+                      onChanged: (friend) {
+                        widget.controller.updateFriend(friend);
+                      },
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
         ],
       ),
     );
